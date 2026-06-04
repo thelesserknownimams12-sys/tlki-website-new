@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contribute — The Lesser Known Imams (as)">
+  <title>Contribute — The Lesser Known Imams (as)</title>
+  <link rel="icon" type="image/jpeg" href="assets/tlki-logo.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .contribute-page { padding: 80px 0; background: var(--bg-dark); min-height: 80vh; }
+    .contribute-intro { font-size: 15px; color: #888; line-height: 1.75; margin-bottom: 28px; }
+    .contribute-intro strong { color: var(--gold); }
+    .contribute-card { background: #151515; border: 1px solid #C8A96A15; border-radius: var(--radius-lg); padding: 28px; margin-bottom: 22px; }
+    .contribute-card-title { font-size: 22px; font-family: var(--font-serif); color: var(--gold); margin-bottom: 22px; border-bottom: 1px solid #C8A96A22; padding-bottom: 16px; }
+    .contribute-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; }
+    .contribute-qr-wrap { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    .contribute-qr-img { max-width: 240px; width: 100%; border-radius: var(--radius-md); background: #fff; padding: 12px; }
+    .contribute-qr-label { font-size: 13px; color: #888; text-align: center; }
+    .bank-details { list-style: none; padding: 0; }
+    .bank-details li { padding: 12px 0; border-bottom: 1px solid #1a1a1a; display: flex; }
+    .bank-details li:last-child { border-bottom: none; }
+    .bank-label { color: var(--gold); font-weight: 500; min-width: 150px; padding-right: 24px; font-size: 15px; }
+    .bank-value { color: #ccc; font-size: 15px; font-family: var(--font-sans), monospace; letter-spacing: 0.01em; }
+    .bank-value.copyable { cursor: pointer; transition: color 0.2s; }
+    .bank-value.copyable:hover { color: var(--gold); }
+    .copy-toast { display: none; font-size: 13px; color: #6AB88A; margin-top: 4px; padding: 6px 14px; background: #122a1e; border-radius: var(--radius-sm); text-align: center; }
+    .copy-toast.show { display: block; }
+    .payment-methods { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+    @media (max-width: 768px) {
+      .contribute-page { padding: 48px 0; }
+      .contribute-card { padding: 22px; }
+      .contribute-layout { grid-template-columns: 1fr; gap: 24px; }
+      .bank-details li { flex-direction: column; gap: 3px; }
+      .bank-label { min-width: auto; padding-right: 0; }
+      .contribute-qr-img { max-width: 220px; }
+      .contribute-card-title { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/tlki-logo.jpeg" alt="TLKI" class="nav-logo-img">
+      <span class="nav-logo-text">THE LESSER KNOWN IMAMS (as)</span>
+      <span class="nav-logo-text-short">TLKI (as)</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="index.html#about" class="nav-link">About</a>
+      <a href="index.html#imams" class="nav-link">Imams</a>
+      <a href="hadiths.html" class="nav-link">Hadiths</a>
+      <a href="index.html#campaigns" class="nav-link">Support</a>
+      <a href="index.html#majalis" class="nav-link">Majalis</a>
+      <a href="contribute.html" class="nav-link active">Contribute</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </div>
+    <a href="https://chat.whatsapp.com/GLehgiD3m7d7w3pOgBCcWZ" target="_blank" rel="noopener" class="nav-cta">Join Community ↗</a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" class="mobile-menu-link">Home</a>
+    <a href="index.html#about" class="mobile-menu-link">About</a>
+    <a href="index.html#imams" class="mobile-menu-link">Imams</a>
+    <a href="hadiths.html" class="mobile-menu-link">Hadiths</a>
+    <a href="index.html#campaigns" class="mobile-menu-link">Support</a>
+    <a href="index.html#majalis" class="mobile-menu-link">Majalis</a>
+    <a href="contribute.html" class="mobile-menu-link">Contribute</a>
+    <a href="contact.html" class="mobile-menu-link">Contact</a>
+    <a href="https://chat.whatsapp.com/GLehgiD3m7d7w3pOgBCcWZ" target="_blank" rel="noopener" class="mobile-menu-cta">Join Community ↗</a>
+  </div>
+
+  <section class="contribute-page">
+    <div class="container" style="max-width:860px">
+    <h2 class="sec-title">Contribute</h2>
+    <p class="contribute-intro">Your support is directed exclusively toward the logistics and organization of Majalis. We recognize that the legacies of the Ahlul Bayt (as) are divinely sustained and eternal; our efforts are merely a humble attempt to gather and learn from their light. Contributions help facilitate these gatherings, providing a space for the community to connect with the wisdom of the Imams (as).</p>
+
+    <div class="contribute-card">
+      <h3 class="contribute-card-title">Bank Transfer Details</h3>
+      <div class="contribute-layout">
+        <div>
+          <ul class="bank-details">
+            <li><span class="bank-label">Account Name</span><span class="bank-value copyable" data-copy="RISE TOGETHER WELFARE TRUST">RISE TOGETHER WELFARE TRUST</span></li>
+            <li><span class="bank-label">Account Number</span><span class="bank-value copyable" data-copy="10223353493">10223353493</span></li>
+            <li><span class="bank-label">IFSC Code</span><span class="bank-value copyable" data-copy="IDFB0040114">IDFB0040114</span></li>
+            <li><span class="bank-label">SWIFT Code</span><span class="bank-value copyable" data-copy="IDFBINBBMUM">IDFBINBBMUM</span></li>
+            <li><span class="bank-label">UPI ID</span><span class="bank-value copyable" data-copy="rise3493@idfcbank">rise3493@idfcbank</span></li>
+          </ul>
+          <p class="copy-toast" id="copyToast">Copied!</p>
+        </div>
+        <div class="contribute-qr-wrap">
+          <img src="assets/barcode.png" alt="Scan to Contribute" class="contribute-qr-img">
+          <p class="contribute-qr-label">Scan to contribute</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="contribute-card">
+      <h3 class="contribute-card-title">Pay via</h3>
+      <div class="payment-methods">
+        <a href="tez://upi/pay?pa=rise3493@idfcbank&pn=RISE%20TOGETHER%20WELFARE%20TRUST" class="payment-icon" title="Google Pay">GPay</a>
+        <a href="paytmmp://pay?pa=rise3493@idfcbank&pn=RISE%20TOGETHER%20WELFARE%20TRUST" class="payment-icon" title="Paytm">Paytm</a>
+        <a href="phonepe://pay?pa=rise3493@idfcbank&pn=RISE%20TOGETHER%20WELFARE%20TRUST" class="payment-icon" title="PhonePe">PhonePe</a>
+        <a href="upi://pay?pa=rise3493@idfcbank&pn=RISE%20TOGETHER%20WELFARE%20TRUST" class="payment-icon" title="UPI">UPI</a>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-arabic">السلام عليكم يا أهل بيت النبوة</div>
+        <div class="footer-links">
+          <a href="index.html" class="footer-link">Home</a>
+          <a href="index.html#about" class="footer-link">About</a>
+          <a href="hadiths.html" class="footer-link">Hadiths</a>
+          <a href="index.html#majalis" class="footer-link">Majalis</a>
+          <a href="contribute.html" class="footer-link">Contribute</a>
+          <a href="contact.html" class="footer-link">Contact</a>
+        </div>
+        <div class="footer-social">
+          <a href="https://chat.whatsapp.com/GLehgiD3m7d7w3pOgBCcWZ" target="_blank" rel="noopener" class="social-btn" aria-label="WhatsApp">W</a>
+          <a href="#" class="social-btn" aria-label="Instagram">IG</a>
+          <a href="https://www.youtube.com/watch?v=8UymIdHg3fc" target="_blank" rel="noopener" class="social-btn" aria-label="YouTube">YT</a>
+        </div>
+      </div>
+      <div class="footer-copy">© 2025 The Lesser Known Imams (as) · Made with love for the Ahlul Bayt (as)</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    (function() {
+      document.querySelectorAll('.copyable').forEach(function(el) {
+        el.addEventListener('click', function() {
+          var text = el.getAttribute('data-copy');
+          if (navigator.clipboard) {
+            navigator.clipboard.writeText(text);
+          } else {
+            var ta = document.createElement('textarea');
+            ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+          }
+          var toast = document.getElementById('copyToast');
+          toast.classList.add('show');
+          setTimeout(function() { toast.classList.remove('show'); }, 1500);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -3,91 +3,395 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="The Lesser Known Imams — Unveiling the Lives & Legacies of the Ahlul Bayt (as). Coming Soon.">
-  <title>The Lesser Known Imams (as) — Coming Soon</title>
+  <meta name="description" content="The Lesser Known Imams (as) — Unveiling the Lives & Legacies of the Ahlul Bayt (as)">
+  <title>The Lesser Known Imams (as)</title>
+  <link rel="icon" type="image/jpeg" href="assets/tlki-logo.jpeg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --gold: #C8A96A;
-      --gold-light: #C8A96A33;
-      --gold-dark: #b89a55;
-      --crimson: #8B1A1A;
-      --bg: #0d0d0d;
-      --bg-card: #161616;
-      --text: #aaaaaa;
-      --text-dim: #666;
-      --text-faint: #444;
-      --font-serif: 'Playfair Display', Georgia, serif;
-      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-    body { font-family: var(--font-sans); background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; position: relative; }
-
-    body::before {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 50% 40%, rgba(200,169,106,0.04) 0%, transparent 60%);
-      pointer-events: none;
-    }
-
-    .container { text-align: center; padding: 40px 24px; position: relative; z-index: 1; max-width: 480px; }
-
-    .logo { width: 100px; height: 100px; border-radius: 50%; border: 2px solid var(--gold); display: flex; align-items: center; justify-content: center; background: var(--bg); margin: 0 auto 24px; position: relative; animation: breathe 4s ease-in-out infinite; }
-    .logo::after { content: ''; position: absolute; inset: -10px; border-radius: 50%; border: 1px solid var(--gold-light); opacity: 0.3; animation: pulse-ring 3s ease-in-out infinite; }
-    .logo-inner { width: 64px; height: 64px; border-radius: 50%; background: var(--crimson); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 30px rgba(139,26,26,0.3); }
-    .logo-dot { width: 30px; height: 30px; border-radius: 50%; background: var(--gold); opacity: 0.85; box-shadow: 0 0 20px rgba(200,169,106,0.35); }
-
-    @keyframes breathe { 0%,100% { transform: scale(1); } 50% { transform: scale(1.02); } }
-    @keyframes pulse-ring { 0%,100% { transform: scale(1); opacity: 0.3; } 50% { transform: scale(1.06); opacity: 0.1; } }
-
-    .badge { font-size: 9px; color: var(--gold); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 16px; opacity: 0.8; }
-    .title { font-size: 24px; font-weight: 500; color: var(--gold); font-family: var(--font-serif); line-height: 1.3; margin-bottom: 8px; }
-    .arabic { font-size: 14px; color: var(--crimson); direction: rtl; margin-bottom: 8px; line-height: 1.6; }
-
-    .divider { display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--gold); font-size: 11px; margin: 20px 0; opacity: 0.5; }
-    .divider-line { width: 60px; height: 0.5px; background: linear-gradient(90deg, transparent, var(--gold)); }
-    .divider-line.rev { background: linear-gradient(90deg, var(--gold), transparent); }
-
-    .subtitle { font-size: 14px; color: var(--text); line-height: 1.7; margin-bottom: 32px; }
-    .subtitle em { font-style: normal; color: var(--gold); opacity: 0.85; }
-
-    .cta { display: inline-block; background: var(--gold); color: var(--bg); font-size: 13px; font-weight: 500; padding: 12px 28px; border-radius: 3px; text-decoration: none; transition: background 0.25s, transform 0.25s, box-shadow 0.25s; }
-    .cta:hover { background: var(--gold-dark); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(200,169,106,0.25); }
-
-    .footer-note { margin-top: 40px; font-size: 10px; color: var(--text-dim); }
-    .footer-note a { color: var(--gold); opacity: 0.6; text-decoration: none; transition: opacity 0.2s; }
-    .footer-note a:hover { opacity: 1; }
-
-    @media (max-width: 400px) {
-      .logo { width: 80px; height: 80px; }
-      .logo-inner { width: 50px; height: 50px; }
-      .logo-dot { width: 24px; height: 24px; }
-      .title { font-size: 20px; }
-      .subtitle { font-size: 13px; }
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <div class="logo">
-      <div class="logo-inner">
-        <div class="logo-dot"></div>
+
+  <nav class="nav" id="mainNav">
+    <a href="#hero" class="nav-logo">
+      <img src="assets/tlki-logo.jpeg" alt="TLKI" class="nav-logo-img">
+      <span class="nav-logo-text">THE LESSER KNOWN IMAMS (as)</span>
+      <span class="nav-logo-text-short">TLKI (as)</span>
+    </a>
+    <div class="nav-links">
+      <a href="#hero" class="nav-link active">Home</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#imams" class="nav-link">Imams</a>
+      <a href="#hadiths" class="nav-link">Hadiths</a>
+      <a href="#campaigns" class="nav-link">Support</a>
+      <a href="#majalis" class="nav-link">Majalis</a>
+      <a href="contribute.html" class="nav-link">Contribute</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </div>
+    <a href="https://chat.whatsapp.com/GLehgiD3m7d7w3pOgBCcWZ" target="_blank" rel="noopener" class="nav-cta">Join Community ↗</a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#hero" class="mobile-menu-link">Home</a>
+    <a href="#about" class="mobile-menu-link">About</a>
+    <a href="#imams" class="mobile-menu-link">Imams</a>
+    <a href="#hadiths" class="mobile-menu-link">Hadiths</a>
+    <a href="#campaigns" class="mobile-menu-link">Support</a>
+    <a href="#majalis" class="mobile-menu-link">Majalis</a>
+    <a href="contribute.html" class="mobile-menu-link">Contribute</a>
+    <a href="contact.html" class="mobile-menu-link">Contact</a>
+    <a href="https://chat.whatsapp.com/GLehgiD3m7d7w3pOgBCcWZ" target="_blank" rel="noopener" class="mobile-menu-cta">Join Community ↗</a>
+  </div>
+
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">السلام عليكم يا أهل بيت النبوة</div>
+        <div class="hero-mobile-logo">
+          <img src="assets/tlki-logo.jpeg" alt="TLKI Logo" class="hero-logo-img-mobile">
+        </div>
+        <h1 class="hero-title">Unveiling the Lives & Legacies of the Ahlul Bayt (as)</h1>
+        <p class="hero-sub">Dedicated to the recognition of the <strong>Ahlul Bayt (as)</strong> whose wisdom and sacrifices are seldom spoken of. Our path is to illuminate the hearts of seekers through the narrations and legacies of the <strong>Imams (as)</strong>, ensuring no part of their light remains hidden.</p>
+        <div class="hero-divider-mobile">
+          <span class="hero-divider-line-mobile"></span>
+          <span>◈</span>
+          <span class="hero-divider-line-mobile rev"></span>
+        </div>
+        <div class="hero-btns">
+          <a href="https://chat.whatsapp.com/GLehgiD3m7d7w3pOgBCcWZ" target="_blank" rel="noopener" class="btn-gold">Join WhatsApp Community</a>
+          <a href="hadiths.html" class="btn-outline">Explore Hadiths</a>
+        </div>
+        <div class="hero-btns-mobile">
+          <a href="https://chat.whatsapp.com/GLehgiD3m7d7w3pOgBCcWZ" target="_blank" rel="noopener" class="btn-gold">Join WhatsApp Community</a>
+          <a href="hadiths.html" class="btn-outline">Explore Hadiths</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <img src="assets/tlki-logo.jpeg" alt="TLKI Logo" class="hero-logo-img">
       </div>
     </div>
-    <div class="badge">السلام عليكم يا أهل بيت النبوة</div>
-    <h1 class="title">The Lesser Known Imams (as)</h1>
-    <p class="arabic">وَمَن يُعَظِّمْ شَعَائِرَ اللَّهِ</p>
-    <div class="divider">
-      <span class="divider-line"></span>
-      <span>◈</span>
-      <span class="divider-line rev"></span>
+  </section>
+
+  <section class="about" id="about">
+    <div class="container">
+      <h2 class="sec-title">About the Project</h2>
+      <div class="sec-divider"></div>
+      <div class="about-layout">
+        <div class="about-text">
+          <blockquote class="about-quote">
+            <p class="about-quote-text">"O Allah, make me recognize Your Proof, for if You do not make me recognize Your Proof, I will deviate from my religion."</p>
+            <cite class="about-quote-ref">— Rasool-e-Khuda (S.A.W.A.), Al-Kafi, Vol. 1, p. 337; Bihar al-Anwar, Vol. 52, p. 146</cite>
+          </blockquote>
+          <p class="about-body"><strong>The Lesser Known Imams (as) [TLKI]</strong> is an initiative born out of a sense of duty toward the legacy of the <strong>Ahlul Bayt (as)</strong>. It is a dedicated effort to ensure that the light of their guidance reaches every seeker of truth.</p>
+          <p class="about-body">While the names of all our <strong>Aimmah (as)</strong> are held sacred, the specific wisdom, struggles, and detailed lives of some of our <strong>Imams (as)</strong> are often discussed less frequently in mainstream gatherings. <strong>TLKI</strong> is a devoted attempt to bridge this gap, focusing on the Ma'refat of those <strong>Imams (as)</strong> whose narrations and profound sacrifices are sometimes mentioned only in passing.</p>
+          <p class="about-body">We hold the firm belief that the words of the <strong>Ahlul Bayt (as)</strong> are a source of illumination for the soul, as echoed in Ziyarat al-Jameah al-Kabeera:</p>
+          <blockquote class="about-arabic-quote">
+            <p class="about-arabic-text">كَلامُكُمْ نُورٌ، وَاَمْرُکُمْ رُشْدٌ</p>
+            <p class="about-arabic-translation">"Your speech is light, and your command is guidance."</p>
+          </blockquote>
+          <p class="about-body about-final">No part of this light should remain hidden from the hearts of the believers.</p>
+          <div class="about-service">
+            <h3 class="about-service-title">Our Path of Service:</h3>
+            <ul class="about-service-list">
+              <li><strong>Spreading the Word:</strong> Curating and sharing verified Hadiths and historical accounts of the Ahlul Bayt (as).</li>
+              <li><strong>Establishing Majalis:</strong> Organizing gatherings specifically dedicated to the Imams (as) in focus.</li>
+              <li><strong>Building Community:</strong> Creating a space where believers can unite under the banner of knowledge and devotion to the Ahlul Bayt (as).</li>
+            </ul>
+          </div>
+          <p class="about-body about-final">We are merely servants standing at their door, hoping that this small effort is accepted in their holy presence.</p>
+        </div>
+        <div class="about-grid">
+          <div class="about-card"><div class="about-card-num">3–5</div><div class="about-card-label">Majalis per Imam per year</div></div>
+          <div class="about-card"><div class="about-card-num">7</div><div class="about-card-label">Imams in focus</div></div>
+          <div class="about-card"><div class="about-card-num">∞</div><div class="about-card-label">Hadiths to share</div></div>
+        </div>
+      </div>
     </div>
-    <p class="subtitle">Unveiling the lives & legacies of the <em>Ahlul Bayt</em>.<br>We're building something meaningful — coming soon.</p>
-    <a href="https://chat.whatsapp.com/GLehgiD3m7d7w3pOgBCcWZ" target="_blank" rel="noopener" class="cta">Join WhatsApp Community</a>
-    <p class="footer-note">Made with love for the Ahlul Bayt · <a href="mailto:contact@thelesserknownimams.com">Contact</a></p>
-  </div>
+  </section>
+
+  <section class="imams" id="imams">
+    <div class="container">
+      <div class="imams-header">
+        <h2 class="sec-title">The Imams (as)</h2>
+        <p class="imams-intro">The divinely appointed guides whose wisdom and sacrifices illuminate the path of truth.</p>
+      </div>
+      <div class="imams-grid">
+        <a href="imam-hasan.html" class="imam-pill"><div class="imam-icon">الحس</div><div class="imam-name">Imam Hasan (as)</div><div class="imam-num">2nd Imam</div></a>
+        <a href="imam-baqir.html" class="imam-pill"><div class="imam-icon">الباق</div><div class="imam-name">Imam Baqir (as)</div><div class="imam-num">5th Imam</div></a>
+        <a href="imam-sadiq.html" class="imam-pill"><div class="imam-icon">الصاد</div><div class="imam-name">Imam Sadiq (as)</div><div class="imam-num">6th Imam</div></a>
+        <a href="imam-kazim.html" class="imam-pill"><div class="imam-icon">الكاظ</div><div class="imam-name">Imam Kazim (as)</div><div class="imam-num">7th Imam</div></a>
+        <a href="imam-jawad.html" class="imam-pill"><div class="imam-icon">الجواد</div><div class="imam-name">Imam Jawad (as)</div><div class="imam-num">9th Imam</div></a>
+        <a href="imam-hadi.html" class="imam-pill"><div class="imam-icon">الهادي</div><div class="imam-name">Imam Hadi (as)</div><div class="imam-num">10th Imam</div></a>
+        <a href="imam-askari.html" class="imam-pill"><div class="imam-icon">العسكري</div><div class="imam-name">Imam Askari (as)</div><div class="imam-num">11th Imam</div></a>
+      </div>
+      <div class="imams-scroll-hint">← scroll →</div>
+    </div>
+  </section>
+
+  <section class="hub" id="hadiths">
+    <div class="container">
+      <h2 class="sec-title">Hadith Gallery</h2>
+      <div class="sec-divider"></div>
+      <div class="hub-grid" id="hubGrid"></div>
+    </div>
+  </section>
+
+  <section class="campaigns" id="campaigns">
+    <div class="container">
+      <h2 class="sec-title">Support Our Mission</h2>
+      <p class="campaigns-sub">Your contributions fund majalis, hadith translation, and community outreach — keeping the legacies of the Ahlul Bayt (as) alive.</p>
+      <div class="campaign-content" id="campaignContent">
+        <div class="campaigns-list" id="campaignsList">
+          <div class="campaign-card">
+            <div class="campaign-top">
+              <div class="campaign-name">Majalis Series — Imam Jawad (as)</div>
+              <span class="campaign-badge">Active</span>
+            </div>
+            <p class="campaign-desc">Organizing majalis gatherings specifically dedicated to the life and legacy of Imam Mohammad al-Jawad (as). Funding covers venue, logistics, and community outreach.</p>
+            <div class="progress-track"><div class="progress-fill" style="width:62%"></div></div>
+            <div class="progress-meta"><span>62% funded</span><span>₹38,000 / ₹62,000</span></div>
+            <div class="campaign-donate">
+              <a href="contribute.html" class="btn-crimson">Contribute</a>
+            </div>
+          </div>
+          <div class="campaign-card">
+            <div class="campaign-top">
+              <div class="campaign-name">Hadith Translation Project</div>
+              <span class="campaign-badge done">Completed</span>
+            </div>
+            <p class="campaign-desc">Translating and verifying hadiths from the Ahlul Bayt (as) into English and Arabic for the website and community distribution.</p>
+            <div class="progress-track"><div class="progress-fill" style="width:100%"></div></div>
+            <div class="progress-meta"><span>100% funded</span><span>₹15,000 / ₹15,000</span></div>
+            <div class="campaign-donate">
+              <a href="contribute.html" class="btn-outline" style="font-size:14px">Contribute More</a>
+            </div>
+          </div>
+        </div>
+        <div class="support-right">
+          <div class="qr-section">
+            <p class="qr-label">Scan to contribute:</p>
+            <div class="qr-placeholder">
+              <img src="assets/barcode.png" alt="Scan to Contribute" class="qr-img">
+            </div>
+            <p class="qr-bank-name">RISE TOGETHER WELFARE TRUST</p>
+            <div class="qr-payment-methods">
+              <span class="qr-method-label">Or pay via:</span>
+              <div class="qr-method-icons">
+                <a href="tez://upi/pay?pa=rise3493@idfcbank&pn=RISE%20TOGETHER%20WELFARE%20TRUST" class="payment-icon" title="Google Pay">GPay</a>
+                <a href="paytmmp://pay?pa=rise3493@idfcbank&pn=RISE%20TOGETHER%20WELFARE%20TRUST" class="payment-icon" title="Paytm">Paytm</a>
+                <a href="upi://pay?pa=rise3493@idfcbank&pn=RISE%20TOGETHER%20WELFARE%20TRUST" class="payment-icon" title="UPI">UPI</a>
+              </div>
+            </div>
+            <a href="contribute.html" class="qr-view-details">View full bank details →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="events" id="majalis">
+    <div class="container">
+      <h2 class="sec-title">Upcoming Majalis</h2>
+      <div class="sec-divider"></div>
+      <div class="majalis-grid" id="majalisGrid"></div>
+    </div>
+  </section>
+
+  <section class="verse saqalain">
+    <div class="container">
+      <div class="verse-block">
+        <p class="verse-arabic">إِنِّي تَارِكٌ فِيكُمُ الثَّقَلَيْنِ: كِتَابَ اللَّهِ، وَعِتْرَتِي أَهْلَ بَيْتِي، مَا إِنْ تَمَسَّكْتُمْ بِهِمَا لَنْ تَضِلُّوا بَعْدِي أَبَداً، وَإِنَّهُمَا لَنْ يَفْتَرِقَا حَتَّى يَرِدَا عَلَيَّ الْحَوْضَ.</p>
+        <p class="verse-text">"Verily, I am leaving among you two weighty things: The Book of Allah and my Progeny, my Ahlul Bayt (as). As long as you hold fast to them both, you will never go astray after me. Indeed, these two will never separate until they return to me at the Pond (of Kawthar)."</p>
+        <div class="verse-refs">
+          <span>— Rasool-e-Khuda (S.A.W.A.)</span>
+          <span>Al-Kafi, Vol. 1, p. 294</span>
+          <span>Kamal al-Din by Shaykh al-Saduq, p. 278</span>
+          <span>Bihar al-Anwar, Vol. 23, p. 106</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-arabic">السلام عليكم يا أهل بيت النبوة</div>
+        <div class="footer-links">
+          <a href="#hero" class="footer-link">Home</a>
+          <a href="#about" class="footer-link">About</a>
+          <a href="hadiths.html" class="footer-link">Hadiths</a>
+          <a href="#majalis" class="footer-link">Majalis</a>
+          <a href="contribute.html" class="footer-link">Contribute</a>
+          <a href="contact.html" class="footer-link">Contact</a>
+        </div>
+        <div class="footer-social">
+          <a href="https://chat.whatsapp.com/GLehgiD3m7d7w3pOgBCcWZ" target="_blank" rel="noopener" class="social-btn" aria-label="WhatsApp">W</a>
+          <a href="#" class="social-btn" aria-label="Instagram">IG</a>
+          <a href="https://www.youtube.com/watch?v=8UymIdHg3fc" target="_blank" rel="noopener" class="social-btn" aria-label="YouTube">YT</a>
+        </div>
+      </div>
+      <div class="footer-copy">© 2025 The Lesser Known Imams (as) · Made with love for the Ahlul Bayt (as)</div>
+    </div>
+  </footer>
+
+  <script src="hadiths-data.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+  <script src="script.js"></script>
+  <script>
+    (function() {
+      var firebaseConfig = {
+        apiKey: "AIzaSyBCZskOsHR9ij30pNrmzuxbs4P6cQMl5dg",
+        authDomain: "tlki-hadiths.firebaseapp.com",
+        databaseURL: "https://tlki-hadiths-default-rtdb.firebaseio.com",
+        projectId: "tlki-hadiths",
+        storageBucket: "tlki-hadiths.firebasestorage.app",
+        messagingSenderId: "792477774090",
+        appId: "1:792477774090:web:7cc8718e5ae8f060d70af3"
+      };
+      firebase.initializeApp(firebaseConfig);
+      var db = firebase.database();
+
+      function extractYouTubeId(url) {
+        if (!url) return null;
+        var m = url.match(/(?:youtube\.com\/(?:watch\?v=|live\/|embed\/)|youtu\.be\/)([\w-]{11})/);
+        return m ? m[1] : null;
+      }
+
+      function slugify(text) {
+        return (text||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+      }
+
+      // ===== HADITH HUB =====
+      var hubGrid = document.getElementById('hubGrid');
+      var hadiths = typeof HADITHS !== 'undefined' ? HADITHS : [];
+
+      function renderHub() {
+        var show = hadiths.slice(0, 5);
+        var html = '';
+        show.forEach(function(h, i) {
+          var desktop = (i >= 3) ? ' hub-card-desktop' : '';
+          var imgHtml = h.imageUrl ? '<img src="' + h.imageUrl + '" alt="" class="hub-card-image" onerror="this.style.display=\'none\'">' : '';
+          html += '<div class="hub-card fade-in' + desktop + '">'
+            + imgHtml
+            + '<div class="hub-card-inner">'
+            + '<div class="hub-card-arabic">' + h.imam + '</div>'
+            + '<div class="hub-card-divider"></div>'
+            + '<div class="hub-card-hadith">"' + h.hadith + '"</div>'
+            + (h.narrator ? '<div class="hub-card-narrator">— ' + h.narrator + '</div>' : '')
+            + '</div>'
+            + '<div class="hub-card-bottom">TLKI</div>'
+            + '</div>';
+        });
+        html += '<a href="hadiths.html" class="hub-card hub-card-cta fade-in">View All →</a>';
+        hubGrid.innerHTML = html;
+        hubGrid.querySelectorAll('.fade-in').forEach(function(el) { el.classList.add('visible'); });
+      }
+
+      renderHub();
+
+      db.ref('hadiths').once('value').then(function(snap) {
+        var data = snap.val();
+        if (data && typeof data === 'object') {
+          hadiths = Object.keys(data).map(function(k) { var h = data[k]; h._key = k; return h; }).sort(function(a, b) { return (a.id || 0) - (b.id || 0); });
+          renderHub();
+        }
+      }).catch(function() {});
+
+      // ===== CAMPAIGNS =====
+      db.ref('campaigns').once('value').then(function(snap) {
+        var data = snap.val();
+        if (data && typeof data === 'object') {
+          var cList = Object.keys(data).map(function(k) { var c = data[k]; c._key = k; return c; });
+          var listEl = document.getElementById('campaignsList');
+          if (listEl && cList.length > 0) {
+            var html = '';
+            cList.forEach(function(c) {
+              var pct = c.goal ? Math.round((c.funded || 0) / c.goal * 100) : 0;
+              var badgeClass = c.status === 'completed' ? ' done' : '';
+              var badgeText = c.status === 'completed' ? 'Completed' : c.status === 'upcoming' ? 'Upcoming' : 'Active';
+              html += '<div class="campaign-card fade-in">'
+                + '<div class="campaign-top">'
+                + '<div class="campaign-name">' + (c.title || 'Campaign') + '</div>'
+                + '<span class="campaign-badge' + badgeClass + '">' + badgeText + '</span>'
+                + '</div>';
+              if (c.description) html += '<p class="campaign-desc">' + c.description + '</p>';
+              html += '<div class="progress-track"><div class="progress-fill" style="width:' + pct + '%"></div></div>'
+                + '<div class="progress-meta"><span>' + pct + '% funded</span><span>₹' + (c.funded || 0).toLocaleString() + ' / ₹' + (c.goal || 0).toLocaleString() + '</span></div>';
+              if (c.status !== 'completed') {
+                html += '<div class="campaign-donate"><a href="contribute.html" class="btn-crimson">Contribute</a></div>';
+              } else {
+                html += '<div class="campaign-donate"><a href="contribute.html" class="btn-outline" style="font-size:14px">Contribute More</a></div>';
+              }
+              if (c.youtubeUrl) {
+                var ytId = extractYouTubeId(c.youtubeUrl);
+                if (ytId) html += '<div class="campaign-video"><iframe src="https://www.youtube.com/embed/' + ytId + '" allowfullscreen loading="lazy"></iframe></div>';
+              }
+              html += '</div>';
+            });
+            listEl.innerHTML = html;
+            listEl.querySelectorAll('.progress-fill').forEach(function(bar) { bar.style.width = bar.style.width; });
+            listEl.querySelectorAll('.fade-in').forEach(function(el) { el.classList.add('visible'); });
+          }
+        }
+      }).catch(function() {});
+
+      // ===== MAJALIS =====
+      var SEED_MAJALIS = [
+        {imam:'Imam Hadi (as)',title:'Shahadat of Imam Ali al-Naqi (as)',detail:'Also: Wiladat of Imam Mohammad al-Baqir (as)',startDate:'22 Dec 2025',endDate:'26 Dec 2025',hijri:'1st–5th Rajab',status:'upcoming',description:'Majalis gatherings commemorating the Shahadat of Imam Ali al-Naqi (as) and celebrating the Wiladat of Imam Mohammad al-Baqir (as).',youtubeUrl:'https://www.youtube.com/watch?v=8UymIdHg3fc',posterUrl:'',speaker:'',location:''},
+        {imam:'Imam Kazim (as)',title:'Shahadat of Imam Al Kazim (as)',detail:'Also: Wiladat of Janabe Ali Asgar, Wafat of Abu Talib, Be\'sat',startDate:'12 Jan 2026',endDate:'16 Jan 2026',hijri:'22nd–25th Rajab',status:'upcoming',description:'Commemorating the Shahadat of Imam Musa al-Kazim (as) along with the Wiladat of Janabe Ali Asgar and Wafat of Abu Talib.',youtubeUrl:'',posterUrl:'',speaker:'',location:''},
+        {imam:'Imam Sadiq (as)',title:'Shahadat of Imam Jafar al-Sadiq (as)',detail:'',startDate:'9 Apr 2026',endDate:'13 Apr 2026',hijri:'21st–25th Shawwal',status:'upcoming',description:'Majalis commemorating the Shahadat of Imam Jafar al-Sadiq (as), the 6th Imam of the Ahlul Bayt.',youtubeUrl:'',posterUrl:'',speaker:'',location:''},
+        {imam:'Imam Jawad (as)',title:'Shahadat of Imam Mohammad al-Taqi (as)',detail:'',startDate:'14 May 2026',endDate:'16 May 2026',hijri:'27th–29th Zilqaad',status:'upcoming',description:'Commemorating the Shahadat of Imam Mohammad al-Jawad (as), the 9th Imam.',youtubeUrl:'',posterUrl:'',speaker:'',location:''},
+        {imam:'Imam Baqir (as)',title:'Shahadat of Imam Mohammad al-Baqir (as)',detail:'Also: Shab-e-Arafat & Shahadat Janabe Muslim',startDate:'23 May 2026',endDate:'27 May 2026',hijri:'5th–9th Zilhajj',status:'upcoming',description:'Majalis gatherings for the Shahadat of Imam Mohammad al-Baqir (as) and commemorating Shab-e-Arafat.',youtubeUrl:'',posterUrl:'',speaker:'',location:''},
+        {imam:'Imam Hasan (as)',title:'Shahadat of Imam Hasan al-Mujtaba (as)',detail:'',startDate:'20 Jul 2026',endDate:'25 Jul 2026',hijri:'5th–10th Safar',status:'upcoming',description:'Commemorating the Shahadat of Imam Hasan al-Mujtaba (as), the 2nd Imam and Master of the Youth of Paradise.',youtubeUrl:'',posterUrl:'',speaker:'',location:''},
+        {imam:'Rasool-e-Khuda (s.a.w.a)',title:'Shahadat of Rasool-e-Khuda (s.a.w.a)',detail:'',startDate:'7 Aug 2026',endDate:'12 Aug 2026',hijri:'23rd–28th Safar',status:'upcoming',description:'Commemorating the Shahadat of Rasool-e-Khuda (s.a.w.a), the Holy Prophet of Islam.',youtubeUrl:'',posterUrl:'',speaker:'',location:''},
+        {imam:'Imam Askari (as)',title:'Shahadat of Imam Hasan Askari (as)',detail:'Also: Wafat of Janabe Masooma-e-Qum (s.a.)',startDate:'17 Aug 2026',endDate:'21 Aug 2026',hijri:'4th–8th Rabbi al Awwal',status:'upcoming',description:'Majalis commemorating the Shahadat of Imam Hasan al-Askari (as) and Wafat of Janabe Masooma-e-Qum (s.a.).',youtubeUrl:'',posterUrl:'',speaker:'',location:''}
+      ];
+
+      var majalisData = SEED_MAJALIS;
+      window._majalisData = majalisData;
+
+      function renderMajalis(data) {
+        var grid = document.getElementById('majalisGrid');
+        if (!grid) return;
+        var html = '';
+        data.forEach(function(m, i) {
+          var slug = slugify(m.imam) + '-' + m.startDate.replace(/\s/g,'-');
+          var statusClass = (m.status || 'upcoming');
+          var posterHtml = m.posterUrl
+            ? '<img src="' + m.posterUrl + '" alt="' + (m.title||'') + '" class="majalis-card-poster" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'"><div class="majalis-card-poster-placeholder" style="display:none"><div class="majalis-card-poster-icon">' + (m.imam||'').substring(0,3) + '</div><div class="majalis-card-poster-label">TLKI</div></div>'
+            : '<div class="majalis-card-poster-placeholder"><div class="majalis-card-poster-icon">' + (m.imam||'').substring(0,3) + '</div><div class="majalis-card-poster-label">TLKI</div></div>';
+          html += '<a href="majlis.html?id=' + (m._key || 'seed_'+i) + '" class="majalis-card fade-in">'
+            + posterHtml
+            + '<div class="majalis-card-body">'
+            + '<div class="majalis-card-imam">' + (m.imam||'') + '</div>'
+            + '<div class="majalis-card-title">' + (m.title||'') + '</div>'
+            + '<div class="majalis-card-meta">' + (m.startDate||'') + (m.endDate && m.endDate !== m.startDate ? ' → ' + m.endDate : '') + (m.hijri ? ' · ' + m.hijri : '') + '</div>'
+            + '<span class="majalis-card-status ' + statusClass + '">' + (m.status || 'Upcoming') + '</span>'
+            + '</div></a>';
+        });
+        grid.innerHTML = html;
+        grid.querySelectorAll('.fade-in').forEach(function(el) { el.classList.add('visible'); });
+      }
+
+      renderMajalis(majalisData);
+
+      db.ref('majalis').once('value').then(function(snap) {
+        var data = snap.val();
+        if (data && typeof data === 'object') {
+          var items = Object.keys(data).map(function(k) { var m = data[k]; m._key = k; return m; });
+          if (items.length > 0) {
+            majalisData = items;
+            window._majalisData = majalisData;
+            renderMajalis(majalisData);
+          }
+        }
+      }).catch(function() {});
+    })();
+  </script>
 </body>
 </html>

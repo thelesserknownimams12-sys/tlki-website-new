@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Admin — TLKI</title>
+  <link rel="icon" type="image/jpeg" href="assets/tlki-logo.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Inter',-apple-system,sans-serif;background:#090909;color:#aaa;line-height:1.6;font-size:14px}
+    .wrap{max-width:1120px;margin:0 auto;padding:24px 24px 48px}
+    a{color:inherit;text-decoration:none}
+
+    .login-box{max-width:360px;margin:80px auto;background:#111;border:1px solid #C8A96A22;border-radius:12px;padding:40px 28px;text-align:center}
+    .login-box h2{font-family:'Playfair Display',serif;font-size:22px;color:#C8A96A;margin-bottom:20px}
+    .login-box input{width:100%;background:#0a0a0a;border:1px solid #222;border-radius:6px;padding:12px 14px;font-size:14px;color:#eee;outline:none;margin-bottom:12px;font-family:inherit;transition:border-color .2s}
+    .login-box input:focus{border-color:#C8A96A}
+    .login-box button{width:100%;background:#C8A96A;color:#0a0a0a;font-size:15px;font-weight:600;padding:12px;border:none;border-radius:6px;cursor:pointer;font-family:inherit;transition:background .2s}
+    .login-box button:hover{background:#b89a55}
+    .login-box button:disabled{opacity:.5;cursor:not-allowed}
+    .login-error{color:#d4876a;font-size:13px;margin-top:10px;display:none}
+
+    .admin-panel{display:none}
+    .hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+    .hdr h1{font-family:'Playfair Display',serif;font-size:24px;color:#C8A96A}
+    .hdr-right{display:flex;align-items:center;gap:16px}
+    .logout-link{font-size:12px;color:#555;cursor:pointer;transition:color .2s}
+    .logout-link:hover{color:#d4876a}
+    .sub{font-size:12px;color:#444;margin-bottom:24px}
+
+    .tabs{display:flex;gap:4px;margin-bottom:20px;overflow-x:auto;padding-bottom:4px}
+    .tab{padding:8px 18px;border:1px solid #1a1a1a;border-radius:6px;font-size:13px;color:#555;cursor:pointer;background:transparent;font-family:inherit;white-space:nowrap;transition:all .2s}
+    .tab:hover{border-color:#C8A96A44;color:#888}
+    .tab.on{background:#C8A96A;color:#0a0a0a;border-color:#C8A96A;font-weight:600}
+
+    .pane{display:none}
+    .pane.on{display:block}
+
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+    .st{background:#111;border:1px solid #181818;border-radius:8px;padding:16px 12px;text-align:center}
+    .st-n{font-size:28px;color:#C8A96A;font-family:'Playfair Display',serif;line-height:1.1}
+    .st-l{font-size:11px;color:#555;margin-top:3px;text-transform:uppercase;letter-spacing:.04em}
+
+    .sh{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:10px}
+    .sh h3{font-family:'Playfair Display',serif;color:#C8A96A;font-size:16px}
+    .sh-right{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+
+    .search-box{display:flex;align-items:center;gap:6px;background:#0e0e0e;border:1px solid #222;border-radius:6px;padding:6px 12px}
+    .search-box input{background:none;border:none;outline:none;color:#ccc;font-size:13px;font-family:inherit;width:160px}
+    .search-box input::placeholder{color:#444}
+    .search-icon{color:#555;font-size:13px}
+
+    .filter-select{background:#0e0e0e;border:1px solid #222;border-radius:6px;padding:6px 10px;color:#aaa;font-size:12px;font-family:inherit;outline:none;cursor:pointer;transition:border-color .2s}
+    .filter-select:focus{border-color:#C8A96A66}
+
+    .btn-add{background:#8B1A1A;color:#C8A96A;border:none;padding:7px 16px;border-radius:6px;font-size:13px;font-weight:500;cursor:pointer;font-family:inherit;transition:background .2s}
+    .btn-add:hover{background:#a02020}
+
+    .tbl{width:100%;border-collapse:collapse;margin-bottom:24px}
+    .tbl th{text-align:left;padding:10px 12px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid #1a1a1a}
+    .tbl td{padding:10px 12px;border-bottom:1px solid #0e0e0e;font-size:13px;color:#999;vertical-align:middle}
+    .tbl tr:hover td{background:#0c0c0c}
+
+    .tag{display:inline-block;padding:3px 10px;border-radius:10px;font-size:11px;font-weight:500}
+    .tag-gold{background:#1a1610;color:#C8A96A}
+    .tag-green{background:#122a1e;color:#6AB88A}
+    .tag-red{background:#2a1111;color:#d4876a}
+    .tag-blue{background:#111a2a;color:#6a8ad4}
+    .tag-grey{background:#151515;color:#666}
+
+    .btn-s{padding:5px 12px;border:none;border-radius:4px;font-size:12px;cursor:pointer;font-family:inherit;margin-right:3px;transition:opacity .15s}
+    .btn-s:hover{opacity:.85}
+    .btn-e{background:#122a1e;color:#6AB88A}
+    .btn-d{background:#2a1111;color:#d4876a}
+    .btn-v{background:#111a2a;color:#6a8ad4}
+
+    .empty-state{text-align:center;padding:40px 20px;color:#444;font-size:13px}
+
+    .thumb{width:44px;height:44px;border-radius:6px;object-fit:cover;border:1px solid #222}
+    .thumb-placeholder{width:44px;height:44px;border-radius:6px;background:#0e0e0e;border:1px dashed #222;display:flex;align-items:center;justify-content:center;color:#333;font-size:12px}
+
+    .pgn{display:flex;justify-content:center;gap:6px;margin-top:14px}
+    .pgn-btn{padding:5px 12px;border:1px solid #1a1a1a;border-radius:4px;font-size:12px;color:#555;cursor:pointer;background:transparent;font-family:inherit;transition:all .15s}
+    .pgn-btn:hover{border-color:#C8A96A44;color:#888}
+    .pgn-btn.on{background:#C8A96A;color:#0a0a0a;border-color:#C8A96A}
+
+    .ov{position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;align-items:center;justify-content:center;z-index:500}
+    .ov.on{display:flex}
+    .mb{background:#111;border:1px solid #C8A96A22;border-radius:12px;padding:28px;max-width:560px;width:92%;max-height:88vh;overflow-y:auto}
+    .mb h3{font-family:'Playfair Display',serif;font-size:18px;color:#C8A96A;margin-bottom:16px}
+    .fg{margin-bottom:14px}
+    .fg label{display:block;font-size:13px;color:#888;margin-bottom:4px}
+    .fg input,.fg select,.fg textarea{width:100%;background:#0a0a0a;border:1px solid #222;border-radius:6px;padding:10px 14px;font-size:14px;color:#eee;outline:none;font-family:inherit;transition:border-color .2s}
+    .fg input:focus,.fg select:focus,.fg textarea:focus{border-color:#C8A96A}
+    .fg textarea{min-height:70px;resize:vertical}
+    .fg .hint{font-size:11px;color:#444;margin-top:3px}
+    .fg .preview-img{margin-top:8px;max-width:140px;border-radius:4px;border:1px solid #222}
+    .fa{display:flex;gap:10px;margin-top:18px}
+    .btn-save{background:#C8A96A;color:#0a0a0a;border:none;padding:10px 24px;border-radius:6px;font-size:14px;font-weight:500;cursor:pointer;font-family:inherit;transition:background .2s}
+    .btn-save:hover{background:#b89a55}
+    .btn-cancel{background:transparent;color:#666;border:1px solid #222;padding:10px 24px;border-radius:6px;font-size:14px;cursor:pointer;font-family:inherit;transition:border-color .2s}
+    .btn-cancel:hover{border-color:#555;color:#999}
+
+    .toast{position:fixed;bottom:20px;right:20px;padding:12px 22px;border-radius:8px;font-size:13px;z-index:999;display:none;font-weight:500}
+    .toast.show{display:block}
+    .toast.ok{background:#122a1e;color:#6AB88A;border:1px solid #2a5544}
+    .toast.err{background:#2a1111;color:#d4876a;border:1px solid #4a2222}
+
+    .detail-row{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #151515;font-size:13px}
+    .detail-row:last-child{border-bottom:none}
+    .detail-label{color:#666;min-width:100px;flex-shrink:0}
+    .detail-val{color:#ccc;word-break:break-word}
+
+    .sync-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;padding:4px 10px;border-radius:10px}
+    .sync-badge.local{background:#2a1111;color:#d4876a}
+    .sync-badge.synced{background:#122a1e;color:#6AB88A}
+    .sync-btn{background:#122a1e;color:#6AB88A;border:1px solid #2a5544;padding:5px 12px;border-radius:6px;font-size:11px;cursor:pointer;font-family:inherit;margin-left:6px;transition:background .2s}
+    .sync-btn:hover{background:#1a3a28}
+
+    @media(max-width:768px){
+      .stats{grid-template-columns:repeat(2,1fr)}
+      .tbl td,.tbl th{padding:8px 8px;font-size:12px}
+      .wrap{padding:16px 12px 36px}
+      .sh{flex-direction:column;align-items:flex-start}
+      .tabs{gap:3px}
+      .tab{padding:6px 12px;font-size:12px}
+      .search-box input{width:120px}
+      .mb{padding:22px}
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-box" id="loginBox">
+    <h2>TLKI Admin</h2>
+    <input type="email" id="loginEmail" placeholder="Email" autocomplete="off">
+    <input type="password" id="loginPass" placeholder="Password" autocomplete="off">
+    <button id="loginBtn" onclick="tryLogin()">Login</button>
+    <div class="login-error" id="loginError"></div>
+  </div>
+
+  <div class="admin-panel" id="adminPanel">
+    <div class="wrap">
+      <div class="hdr">
+        <h1>TLKI Admin</h1>
+        <div class="hdr-right">
+          <span style="font-size:12px;color:#444" id="loginEmailDisplay"></span>
+          <span class="logout-link" onclick="logout()">Logout</span>
+        </div>
+      </div>
+      <p class="sub">Manage hadiths and majalis. Changes sync to Firebase instantly.</p>
+
+      <div class="tabs" id="tabBar">
+        <button class="tab on" data-tab="hadiths">Hadiths</button>
+        <button class="tab" data-tab="majalis">Majalis</button>
+      </div>
+
+      <!-- HADITHS -->
+      <div class="pane on" id="pane-hadiths">
+        <div class="stats">
+          <div class="st"><div class="st-n" id="sTotal">—</div><div class="st-l">Total</div></div>
+          <div class="st"><div class="st-n" id="sImams">—</div><div class="st-l">Imams</div></div>
+          <div class="st"><div class="st-n" id="sArabic">—</div><div class="st-l">Arabic</div></div>
+          <div class="st"><div class="st-n" id="sNarrator">—</div><div class="st-l">Narrated</div></div>
+        </div>
+        <div class="sh">
+          <h3>Hadiths</h3>
+          <div class="sh-right">
+            <div class="search-box"><span class="search-icon">⌕</span><input type="text" id="hadithSearch" placeholder="Search hadiths..."></div>
+            <select class="filter-select" id="hadithFilter"><option value="all">All Imams</option></select>
+            <button class="btn-add" onclick="openAddH()">+ Add</button>
+          </div>
+        </div>
+        <table class="tbl"><thead><tr><th>#</th><th>Imam</th><th>Hadith</th><th>Ar</th><th>Img</th><th>Narrator</th><th>Reference</th><th>Actions</th></tr></thead><tbody id="htb"></tbody></table>
+        <div class="pgn" id="hPgn"></div>
+      </div>
+
+      <!-- MAJALIS -->
+      <div class="pane" id="pane-majalis">
+        <div class="stats">
+          <div class="st"><div class="st-n" id="mTotal">—</div><div class="st-l">Total</div></div>
+          <div class="st"><div class="st-n" id="mUpcoming">—</div><div class="st-l">Upcoming</div></div>
+          <div class="st"><div class="st-n" id="mOngoing">—</div><div class="st-l">Ongoing</div></div>
+          <div class="st"><div class="st-n" id="mWithYt">—</div><div class="st-l">With Video</div></div>
+        </div>
+        <div class="sh">
+          <h3>Majalis</h3>
+          <div class="sh-right">
+            <div class="search-box"><span class="search-icon">⌕</span><input type="text" id="majSearch" placeholder="Search..."></div>
+            <select class="filter-select" id="majFilter"><option value="all">All Status</option><option value="upcoming">Upcoming</option><option value="ongoing">Ongoing</option><option value="completed">Completed</option></select>
+            <button class="btn-add" onclick="openAddM()">+ Add</button>
+          </div>
+        </div>
+        <table class="tbl"><thead><tr><th>Poster</th><th>Imam</th><th>Title</th><th>Dates</th><th>Status</th><th>YT</th><th>Actions</th></tr></thead><tbody id="mtb"></tbody></table>
+      </div>
+    </div>
+  </div>
+
+  <!-- HADITH MODAL -->
+  <div class="ov" id="hMdl"><div class="mb">
+    <h3 id="hMdlT">Add Hadith</h3>
+    <div class="fg"><label>Imam</label><select id="fImam"><option value="hasan">Imam Hasan (as)</option><option value="baqir">Imam Baqir (as)</option><option value="sadiq">Imam Sadiq (as)</option><option value="kazim">Imam Kazim (as)</option><option value="rida">Imam Rida (as)</option><option value="jawad">Imam Jawad (as)</option><option value="hadi">Imam Hadi (as)</option><option value="askari">Imam Askari (as)</option><option value="mahdi">Imam Mahdi (atfs)</option></select></div>
+    <div class="fg"><label>Hadith (English)</label><textarea id="fHadith" placeholder="English hadith text..."></textarea></div>
+    <div class="fg"><label>Hadith (Arabic)</label><textarea id="fHadithAr" placeholder="الحديث بالعربية..." dir="rtl" style="font-family:'Amiri',serif;font-size:16px"></textarea><div class="hint">RTL Arabic text</div></div>
+    <div class="fg"><label>Narrator / Attribution</label><input id="fNarrator" placeholder="e.g. Imam Sadiq (as), Rasool-e-Khuda (S.A.W.A.)"><div class="hint">Who said or narrated this</div></div>
+    <div class="fg"><label>Reference</label><input id="fRef" placeholder="Al-Kafi, Vol. 2, p. 188"></div>
+    <div class="fg"><label>Image URL (optional)</label><input id="fImgUrl" placeholder="https://..."><img class="preview-img" id="fImgUrlPrev" style="display:none"><div class="hint">Image shown on hadith card and detail view</div></div>
+    <div class="fa"><button class="btn-save" id="hSaveBtn" onclick="saveH()">Save</button><button class="btn-cancel" onclick="closeMdl('hMdl')">Cancel</button></div>
+  </div></div>
+
+  <!-- MAJALIS MODAL -->
+  <div class="ov" id="mMdl"><div class="mb">
+    <h3 id="mMdlT">Add Majlis</h3>
+    <div class="fg"><label>Imam Name</label><select id="fMImam"><option value="Imam Hasan">Imam Hasan</option><option value="Imam Baqir">Imam Baqir</option><option value="Imam Sadiq">Imam Sadiq</option><option value="Imam Kazim">Imam Kazim</option><option value="Imam Rida">Imam Rida</option><option value="Imam Jawad">Imam Jawad</option><option value="Imam Hadi">Imam Hadi</option><option value="Imam Askari">Imam Askari</option><option value="Rasool-e-Khuda">Rasool-e-Khuda</option></select></div>
+    <div class="fg"><label>Title</label><input id="fMTitle" placeholder="e.g. Shahadat of Imam Ali al-Naqi (as)"></div>
+    <div class="fg"><label>Start Date</label><input id="fMStartDate" placeholder="e.g. 22 Dec 2025"></div>
+    <div class="fg"><label>End Date</label><input id="fMEndDate" placeholder="e.g. 26 Dec 2025"></div>
+    <div class="fg"><label>Islamic Date / Hijri</label><input id="fMHijri" placeholder="e.g. 1st–5th Rajab"></div>
+    <div class="fg"><label>Description</label><textarea id="fMDesc" placeholder="Description of the majlis..."></textarea></div>
+    <div class="fg"><label>Additional Detail</label><input id="fMDetail" placeholder="e.g. Also: Wiladat of Imam Baqir (as)"></div>
+    <div class="fg"><label>Poster URL</label><input id="fMPoster" placeholder="https://..."><img class="preview-img" id="fMPosterPrev" style="display:none"></div>
+    <div class="fg"><label>Banner URL (optional)</label><input id="fMBanner" placeholder="https://..."><img class="preview-img" id="fMBannerPrev" style="display:none"></div>
+    <div class="fg"><label>YouTube URL</label><input id="fMYt" placeholder="https://youtube.com/watch?v=..."><div class="hint">Full YouTube URL — video will embed on frontend</div></div>
+    <div class="fg"><label>Speaker Name (optional)</label><input id="fMSpeaker" placeholder="e.g. Maulana X"></div>
+    <div class="fg"><label>Location (optional)</label><input id="fMLocation" placeholder="e.g. TLKI Main Hall"></div>
+    <div class="fg"><label>Status</label><select id="fMStatus"><option value="upcoming">Upcoming</option><option value="ongoing">Ongoing</option><option value="completed">Completed</option></select></div>
+    <div class="fa"><button class="btn-save" id="mSaveBtn" onclick="saveM()">Save</button><button class="btn-cancel" onclick="closeMdl('mMdl')">Cancel</button></div>
+  </div></div>
+
+  <!-- DETAIL VIEW MODAL -->
+  <div class="ov" id="dMdl"><div class="mb">
+    <h3 id="dMdlT">Details</h3>
+    <div id="dMdlBody"></div>
+    <div id="dMdlYoutube"></div>
+    <div class="fa" style="margin-top:16px"><button class="btn-cancel" onclick="closeMdl('dMdl')">Close</button></div>
+  </div></div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+  <script>
+    var FC={apiKey:"AIzaSyBCZskOsHR9ij30pNrmzuxbs4P6cQMl5dg",authDomain:"tlki-hadiths.firebaseapp.com",databaseURL:"https://tlki-hadiths-default-rtdb.firebaseio.com",projectId:"tlki-hadiths",storageBucket:"tlki-hadiths.firebasestorage.app",messagingSenderId:"792477774090",appId:"1:792477774090:web:7cc8718e5ae8f060d70af3"};
+    firebase.initializeApp(FC);var db=firebase.database(),auth=firebase.auth();
+
+    var IM={hasan:{ar:'الإمام الحسن عليه السلام',en:'Imam Hasan (as)'},baqir:{ar:'الإمام الباقر عليه السلام',en:'Imam Baqir (as)'},sadiq:{ar:'الإمام الصادق عليه السلام',en:'Imam Sadiq (as)'},kazim:{ar:'الإمام الكاظم عليه السلام',en:'Imam Kazim (as)'},rida:{ar:'الإمام الرضا عليه السلام',en:'Imam Rida (as)'},jawad:{ar:'الإمام الجواد عليه السلام',en:'Imam Jawad (as)'},hadi:{ar:'الإمام الهادي عليه السلام',en:'Imam Hadi (as)'},askari:{ar:'الإمام العسكري عليه السلام',en:'Imam Askari (as)'},mahdi:{ar:'الإمام المهدي عجل الله تعالى فرجه',en:'Imam Mahdi (atfs)'}};
+
+    var hData=[],mData=[];
+    var editH=null,editM=null;
+    var hPage=1,PAGE_SIZE=10;
+    var mSynced=false;
+
+    var SEED_MAJALIS=[
+      {imamName:'Imam Hadi',title:'Shahadat of Imam Ali al-Naqi (as)',startDate:'22 Dec 2025',endDate:'26 Dec 2025',hijri:'1st–5th Rajab',description:'Commemorating the martyrdom of Imam Ali al-Naqi al-Hadi (as).',detail:'Also: Wiladat of Imam Mohammad al-Baqir (as)',posterUrl:'',bannerUrl:'',youtubeUrl:'https://www.youtube.com/watch?v=8UymIdHg3fc',speakerName:'',location:'',status:'upcoming'},
+      {imamName:'Imam Kazim',title:'Shahadat of Imam Al Kazim (as)',startDate:'12 Jan 2026',endDate:'16 Jan 2026',hijri:'22nd–25th Rajab',description:'Commemorating the martyrdom of Imam Musa al-Kazim (as).',detail:'Also: Wiladat of Janabe Ali Asgar, Wafat of Abu Talib, Be\'sat',posterUrl:'',bannerUrl:'',youtubeUrl:'',speakerName:'',location:'',status:'upcoming'},
+      {imamName:'Imam Sadiq',title:'Shahadat of Imam Jafar al-Sadiq (as)',startDate:'9 Apr 2026',endDate:'13 Apr 2026',hijri:'21st–25th Shawwal',description:'Commemorating the martyrdom of Imam Jafar al-Sadiq (as).',detail:'',posterUrl:'',bannerUrl:'',youtubeUrl:'',speakerName:'',location:'',status:'upcoming'},
+      {imamName:'Imam Jawad',title:'Shahadat of Imam Mohammad al-Taqi (as)',startDate:'14 May 2026',endDate:'16 May 2026',hijri:'27th–29th Zilqaad',description:'Commemorating the martyrdom of Imam Mohammad al-Taqi al-Jawad (as).',detail:'',posterUrl:'',bannerUrl:'',youtubeUrl:'',speakerName:'',location:'',status:'upcoming'},
+      {imamName:'Imam Baqir',title:'Shahadat of Imam Mohammad al-Baqir (as)',startDate:'23 May 2026',endDate:'27 May 2026',hijri:'5th–9th Zilhajj',description:'Commemorating the martyrdom of Imam Mohammad al-Baqir (as).',detail:'Also: Shab-e-Arafat & Shahadat Janabe Muslim',posterUrl:'',bannerUrl:'',youtubeUrl:'',speakerName:'',location:'',status:'upcoming'},
+      {imamName:'Imam Hasan',title:'Shahadat of Imam Hasan al-Mujtaba (as)',startDate:'20 Jul 2026',endDate:'25 Jul 2026',hijri:'5th–10th Safar',description:'Commemorating the martyrdom of Imam Hasan al-Mujtaba (as).',detail:'',posterUrl:'',bannerUrl:'',youtubeUrl:'',speakerName:'',location:'',status:'upcoming'},
+      {imamName:'Rasool-e-Khuda',title:'Shahadat of Rasool-e-Khuda (s.a.w.a)',startDate:'7 Aug 2026',endDate:'12 Aug 2026',hijri:'23rd–28th Safar',description:'Commemorating the martyrdom of Rasool-e-Khuda (s.a.w.a).',detail:'',posterUrl:'',bannerUrl:'',youtubeUrl:'',speakerName:'',location:'',status:'upcoming'},
+      {imamName:'Imam Askari',title:'Shahadat of Imam Hasan Askari (as)',startDate:'17 Aug 2026',endDate:'21 Aug 2026',hijri:'4th–8th Rabbi al Awwal',description:'Commemorating the martyrdom of Imam Hasan al-Askari (as).',detail:'Also: Wafat of Janabe Masooma-e-Qum (s.a.)',posterUrl:'',bannerUrl:'',youtubeUrl:'',speakerName:'',location:'',status:'upcoming'}
+    ];
+
+    function extractYtId(url){if(!url)return null;var m=url.match(/(?:youtube\.com\/(?:watch\?v=|live\/|embed\/)|youtu\.be\/)([\w-]{11})/);return m?m[1]:null}
+    function toast(m,e){var t=document.getElementById('toast');t.textContent=m;t.className='toast show '+(e?'err':'ok');setTimeout(function(){t.className='toast'},2500)}
+    function closeMdl(id){document.getElementById(id).classList.remove('on')}
+
+    document.getElementById('tabBar').addEventListener('click',function(ev){if(!ev.target.classList.contains('tab'))return;document.querySelectorAll('.tab').forEach(function(b){b.classList.remove('on')});document.querySelectorAll('.pane').forEach(function(p){p.classList.remove('on')});ev.target.classList.add('on');document.getElementById('pane-'+ev.target.dataset.tab).classList.add('on')});
+
+    document.getElementById('hadithSearch').addEventListener('input',function(){hPage=1;renderH()});
+    document.getElementById('hadithFilter').addEventListener('change',function(){hPage=1;renderH()});
+    document.getElementById('majSearch').addEventListener('input',renderM);
+    document.getElementById('majFilter').addEventListener('change',renderM);
+
+    document.getElementById('fMPoster').addEventListener('input',function(){var p=document.getElementById('fMPosterPrev');if(this.value){p.src=this.value;p.style.display='block'}else{p.style.display='none'}});
+    document.getElementById('fMBanner').addEventListener('input',function(){var p=document.getElementById('fMBannerPrev');if(this.value){p.src=this.value;p.style.display='block'}else{p.style.display='none'}});
+    document.getElementById('fImgUrl').addEventListener('input',function(){var p=document.getElementById('fImgUrlPrev');if(this.value){p.src=this.value;p.style.display='block'}else{p.style.display='none'}});
+
+    function tryLogin(){var e=document.getElementById('loginEmail').value.trim(),p=document.getElementById('loginPass').value;if(!e||!p)return;document.getElementById('loginBtn').disabled=true;document.getElementById('loginError').style.display='none';auth.signInWithEmailAndPassword(e,p).then(function(){showAdmin(e)}).catch(function(er){document.getElementById('loginError').textContent=er.message||'Login failed';document.getElementById('loginError').style.display='block';document.getElementById('loginBtn').disabled=false})}
+    function showAdmin(email){document.getElementById('loginBox').style.display='none';document.getElementById('adminPanel').style.display='block';document.getElementById('loginEmailDisplay').textContent=email;loadAll()}
+    function logout(){auth.signOut();document.getElementById('adminPanel').style.display='none';document.getElementById('loginBox').style.display='block';document.getElementById('loginEmail').value='';document.getElementById('loginPass').value='';document.getElementById('loginError').style.display='none';document.getElementById('loginBtn').disabled=false}
+    auth.onAuthStateChanged(function(u){if(u)showAdmin(u.email)});
+    document.getElementById('loginPass').addEventListener('keydown',function(e){if(e.key==='Enter')tryLogin()});
+    document.getElementById('loginEmail').addEventListener('keydown',function(e){if(e.key==='Enter')tryLogin()});
+
+    function loadAll(){loadH();loadM()}
+
+    // ===== HADITHS =====
+    function loadH(){db.ref('hadiths').once('value').then(function(s){var d=s.val();hData=d?Object.keys(d).map(function(k){var h=d[k];h._key=k;return h}).sort(function(a,b){return(a.id||0)-(b.id||0)}):[];populateHFilter();renderH()}).catch(function(er){document.getElementById('htb').innerHTML='<tr><td colspan="7" class="empty-state">Error loading hadiths: '+er.message+'</td></tr>'})}
+    function populateHFilter(){var slugs=[];hData.forEach(function(h){if(slugs.indexOf(h.slug)===-1)slugs.push(h.slug)});var sel=document.getElementById('hadithFilter');sel.innerHTML='<option value="all">All Imams</option>';slugs.forEach(function(s){var n=IM[s]?IM[s].en:s;sel.innerHTML+='<option value="'+s+'">'+n+'</option>'})}
+    function getFilteredH(){var q=document.getElementById('hadithSearch').value.toLowerCase(),f=document.getElementById('hadithFilter').value;return hData.filter(function(h){var mQ=!q||h.hadith.toLowerCase().indexOf(q)>-1||(h.imamEn||'').toLowerCase().indexOf(q)>-1||(h.narrator||'').toLowerCase().indexOf(q)>-1||(h.reference||'').toLowerCase().indexOf(q)>-1;var mF=f==='all'||h.slug===f;return mQ&&mF})}
+    function renderH(){var filtered=getFilteredH();var imams={},ar=0,nr=0;hData.forEach(function(h){imams[h.slug]=true;if(h.hadithAr)ar++;if(h.narrator)nr++});document.getElementById('sTotal').textContent=hData.length;document.getElementById('sImams').textContent=Object.keys(imams).length;document.getElementById('sArabic').textContent=ar;document.getElementById('sNarrator').textContent=nr;
+      var totalPages=Math.ceil(filtered.length/PAGE_SIZE)||1;if(hPage>totalPages)hPage=totalPages;
+      var start=(hPage-1)*PAGE_SIZE,items=filtered.slice(start,start+PAGE_SIZE);
+      var html='';items.forEach(function(h,i){var short=h.hadith.length>60?h.hadith.substring(0,60)+'...':h.hadith;html+='<tr><td>'+(start+i+1)+'</td><td><span class="tag tag-gold">'+(h.imamEn||'')+'</span></td><td>'+short+'</td><td>'+(h.hadithAr?'<span class="tag tag-green">✓</span>':'<span class="tag tag-grey">—</span>')+'</td><td>'+(h.imageUrl?'<span class="tag tag-blue">✓</span>':'<span class="tag tag-grey">—</span>')+'</td><td style="font-size:12px;color:#777">'+(h.narrator||'—')+'</td><td style="font-size:11px;color:#555">'+(h.reference||'—')+'</td><td><button class="btn-s btn-v" onclick="viewH(\''+h._key+'\')">View</button><button class="btn-s btn-e" onclick="editH(\''+h._key+'\')">Edit</button><button class="btn-s btn-d" onclick="delH(\''+h._key+'\')">Del</button></td></tr>'});
+      document.getElementById('htb').innerHTML=html||'<tr><td colspan="8" class="empty-state">No hadiths found.</td></tr>';
+      var pgn='';for(var p=1;p<=totalPages;p++){pgn+='<button class="pgn-btn'+(p===hPage?' on':'')+'" onclick="hPage='+p+';renderH()">'+p+'</button>'}document.getElementById('hPgn').innerHTML=totalPages>1?pgn:''}
+
+    function openAddH(){editH=null;document.getElementById('hMdlT').textContent='Add Hadith';document.getElementById('fImam').value='hasan';document.getElementById('fHadith').value='';document.getElementById('fHadithAr').value='';document.getElementById('fNarrator').value='';document.getElementById('fRef').value='';document.getElementById('fImgUrl').value='';document.getElementById('fImgUrlPrev').style.display='none';document.getElementById('hMdl').classList.add('on')}
+    function editHa(k){var h=hData.find(function(x){return x._key===k});if(!h)return;editH=k;document.getElementById('hMdlT').textContent='Edit Hadith';document.getElementById('fImam').value=h.slug||'hasan';document.getElementById('fHadith').value=h.hadith||'';document.getElementById('fHadithAr').value=h.hadithAr||'';document.getElementById('fNarrator').value=h.narrator||'';document.getElementById('fRef').value=h.reference||'';document.getElementById('fImgUrl').value=h.imageUrl||'';var ip=document.getElementById('fImgUrlPrev');if(h.imageUrl){ip.src=h.imageUrl;ip.style.display='block'}else{ip.style.display='none'}document.getElementById('hMdl').classList.add('on')}
+    function viewH(k){var h=hData.find(function(x){return x._key===k});if(!h)return;document.getElementById('dMdlT').textContent='Hadith Details';var b='';if(h.imageUrl)b+='<div class="detail-row"><div class="detail-label">Image</div><div class="detail-val"><img src="'+h.imageUrl+'" style="max-width:200px;border-radius:6px;border:1px solid #222" onerror="this.style.display=\'none\'"></div></div>';b+='<div class="detail-row"><div class="detail-label">Imam</div><div class="detail-val">'+(h.imamEn||'')+'</div></div><div class="detail-row"><div class="detail-label">Arabic Imam</div><div class="detail-val" dir="rtl" style="font-family:Amiri,serif;font-size:16px">'+(h.imam||'')+'</div></div><div class="detail-row"><div class="detail-label">Hadith</div><div class="detail-val">"' +(h.hadith||'')+'"</div></div>';if(h.hadithAr)b+='<div class="detail-row"><div class="detail-label">Arabic</div><div class="detail-val" dir="rtl" style="font-family:Amiri,serif;font-size:16px;color:#C8A96A">'+h.hadithAr+'</div></div>';b+='<div class="detail-row"><div class="detail-label">Narrator</div><div class="detail-val">'+(h.narrator||'—')+'</div></div><div class="detail-row"><div class="detail-label">Reference</div><div class="detail-val">'+(h.reference||'—')+'</div></div>';document.getElementById('dMdlBody').innerHTML=b;document.getElementById('dMdlYoutube').innerHTML='';document.getElementById('dMdl').classList.add('on')}
+    function saveH(){var sl=document.getElementById('fImam').value,ht=document.getElementById('fHadith').value.trim(),ar=document.getElementById('fHadithAr').value.trim(),nr=document.getElementById('fNarrator').value.trim(),rf=document.getElementById('fRef').value.trim(),iu=document.getElementById('fImgUrl').value.trim();if(!ht){toast('Hadith text required',1);return}var b=document.getElementById('hSaveBtn');b.textContent='Saving...';b.disabled=true;var info=IM[sl]||{ar:sl,en:sl},d={imam:info.ar,imamEn:info.en,slug:sl,hadith:ht,reference:rf};if(ar)d.hadithAr=ar;if(nr)d.narrator=nr;if(iu)d.imageUrl=iu;if(editH!==null){db.ref('hadiths/'+editH).update(d).then(function(){toast('Updated!');closeMdl('hMdl');loadH();b.textContent='Save';b.disabled=false}).catch(function(e){toast(e.message,1);b.textContent='Save';b.disabled=false})}else{d.id=(hData.reduce(function(m,x){return Math.max(m,x.id||0)},0))+1;db.ref('hadiths').push(d).then(function(){toast('Added!');closeMdl('hMdl');loadH();b.textContent='Save';b.disabled=false}).catch(function(e){toast(e.message,1);b.textContent='Save';b.disabled=false})}}
+    function delH(k){if(!confirm('Delete this hadith?'))return;db.ref('hadiths/'+k).remove().then(function(){toast('Deleted');loadH()}).catch(function(e){toast(e.message,1)})}
+    window.editH=editHa;window.viewH=viewH;window.delH=delH;window.openAddH=openAddH;window.saveH=saveH;
+
+    // ===== MAJALIS =====
+    function loadM(){
+      db.ref('majalis').once('value').then(function(s){
+        var d=s.val();
+        if(d&&typeof d==='object'){
+          mData=Object.keys(d).map(function(k){var m=d[k];m._key=k;return m});
+          mSynced=true;
+        }else{mData=SEED_MAJALIS.map(function(m,i){var o=Object.assign({},m);o._key='seed_m_'+i;return o});mSynced=false}
+        renderM();
+      }).catch(function(er){
+        mData=SEED_MAJALIS.map(function(m,i){var o=Object.assign({},m);o._key='seed_m_'+i;return o});
+        mSynced=false;
+        renderM();
+        toast('Firebase /majalis unavailable — showing demo data',1);
+      });
+    }
+    function getFilteredM(){var q=document.getElementById('majSearch').value.toLowerCase(),f=document.getElementById('majFilter').value;return mData.filter(function(m){var mQ=!q||((m.title||'').toLowerCase().indexOf(q)>-1||(m.imamName||'').toLowerCase().indexOf(q)>-1||(m.detail||'').toLowerCase().indexOf(q)>-1||(m.hijri||'').toLowerCase().indexOf(q)>-1||(m.startDate||'').toLowerCase().indexOf(q)>-1||(m.endDate||'').toLowerCase().indexOf(q)>-1);var mF=f==='all'||m.status===f;return mQ&&mF})}
+    function renderM(){var filtered=getFilteredM();var up=0,og=0,yt=0;mData.forEach(function(m){if(m.status==='upcoming')up++;if(m.status==='ongoing')og++;if(m.youtubeUrl)yt++});document.getElementById('mTotal').textContent=mData.length;document.getElementById('mUpcoming').textContent=up;document.getElementById('mOngoing').textContent=og;document.getElementById('mWithYt').textContent=yt;
+      var syncHtml=mSynced?'<span class="sync-badge synced">✓ Synced</span>':'<span class="sync-badge local">Local data</span> <button class="sync-btn" onclick="syncMajalis()">↑ Sync to Firebase</button>';
+      document.getElementById('majSync')&&document.getElementById('majSync').remove();
+      var sh=document.querySelector('#pane-majalis .sh');
+      if(sh){var sp=document.createElement('span');sp.id='majSync';sp.innerHTML=syncHtml;sh.querySelector('.sh-right').appendChild(sp)}
+      var html='';filtered.forEach(function(m){
+        var th=m.posterUrl?'<img src="'+m.posterUrl+'" class="thumb" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'"><div class="thumb-placeholder" style="display:none">—</div>':'<div class="thumb-placeholder">—</div>';
+        var stClass=m.status==='completed'?'tag-green':m.status==='ongoing'?'tag-blue':'tag-gold';
+        var ytv=m.youtubeUrl?'<span class="tag tag-blue">✓</span>':'<span class="tag tag-grey">—</span>';
+        var dates=(m.startDate||'')+(m.endDate&&m.endDate!==m.startDate?' – '+m.endDate:'');
+        html+='<tr><td>'+th+'</td><td><span class="tag tag-gold">'+(m.imamName||'—')+'</span></td><td><strong style="color:#ccc;font-weight:500">'+(m.title||'—')+'</strong>'+(m.detail?'<div style="font-size:11px;color:#555;margin-top:2px">'+m.detail+'</div>':'')+'</td><td style="font-size:12px">'+dates+'</td><td><span class="tag '+stClass+'">'+(m.status||'—')+'</span></td><td>'+ytv+'</td><td><button class="btn-s btn-v" onclick="viewM(\''+m._key+'\')">View</button><button class="btn-s btn-e" onclick="editM(\''+m._key+'\')">Edit</button><button class="btn-s btn-d" onclick="delM(\''+m._key+'\')">Del</button></td></tr>'});
+      document.getElementById('mtb').innerHTML=html||'<tr><td colspan="7" class="empty-state">No majalis found.</td></tr>'}
+    function syncMajalis(){
+      var items=mData.filter(function(m){return m._key&&m._key.indexOf('seed_')===0});
+      if(!items.length){toast('All majalis already synced',0);return}
+      var count=0,total=items.length;
+      items.forEach(function(m){
+        var d={imamName:m.imamName,title:m.title,startDate:m.startDate||'',endDate:m.endDate||'',hijri:m.hijri||'',description:m.description||'',detail:m.detail||'',status:m.status||'upcoming'};
+        if(m.posterUrl)d.posterUrl=m.posterUrl;
+        if(m.bannerUrl)d.bannerUrl=m.bannerUrl;
+        if(m.youtubeUrl)d.youtubeUrl=m.youtubeUrl;
+        if(m.speakerName)d.speakerName=m.speakerName;
+        if(m.location)d.location=m.location;
+        db.ref('majalis').push(d).then(function(){
+          count++;
+          if(count===total){toast(total+' majlis(s) synced to Firebase!');loadM()}
+        }).catch(function(e){toast('Sync error: '+e.message,1)});
+      });
+    }
+    function openAddM(){editM=null;document.getElementById('mMdlT').textContent='Add Majlis';document.getElementById('fMImam').value='Imam Hasan';document.getElementById('fMTitle').value='';document.getElementById('fMStartDate').value='';document.getElementById('fMEndDate').value='';document.getElementById('fMHijri').value='';document.getElementById('fMDesc').value='';document.getElementById('fMDetail').value='';document.getElementById('fMPoster').value='';document.getElementById('fMPosterPrev').style.display='none';document.getElementById('fMBanner').value='';document.getElementById('fMBannerPrev').style.display='none';document.getElementById('fMYt').value='';document.getElementById('fMSpeaker').value='';document.getElementById('fMLocation').value='';document.getElementById('fMStatus').value='upcoming';document.getElementById('mMdl').classList.add('on')}
+    function editMa(k){var m=mData.find(function(x){return x._key===k});if(!m)return;editM=k;document.getElementById('mMdlT').textContent='Edit Majlis';document.getElementById('fMImam').value=m.imamName||'Imam Hasan';document.getElementById('fMTitle').value=m.title||'';document.getElementById('fMStartDate').value=m.startDate||'';document.getElementById('fMEndDate').value=m.endDate||'';document.getElementById('fMHijri').value=m.hijri||'';document.getElementById('fMDesc').value=m.description||'';document.getElementById('fMDetail').value=m.detail||'';document.getElementById('fMPoster').value=m.posterUrl||'';var pp=document.getElementById('fMPosterPrev');if(m.posterUrl){pp.src=m.posterUrl;pp.style.display='block'}else{pp.style.display='none'}document.getElementById('fMBanner').value=m.bannerUrl||'';var bp=document.getElementById('fMBannerPrev');if(m.bannerUrl){bp.src=m.bannerUrl;bp.style.display='block'}else{bp.style.display='none'}document.getElementById('fMYt').value=m.youtubeUrl||'';document.getElementById('fMSpeaker').value=m.speakerName||'';document.getElementById('fMLocation').value=m.location||'';document.getElementById('fMStatus').value=m.status||'upcoming';document.getElementById('mMdl').classList.add('on')}
+    function viewM(k){var m=mData.find(function(x){return x._key===k});if(!m)return;document.getElementById('dMdlT').textContent='Majlis Details';var b='<div class="detail-row"><div class="detail-label">Imam</div><div class="detail-val">'+(m.imamName||'—')+'</div></div><div class="detail-row"><div class="detail-label">Title</div><div class="detail-val">'+(m.title||'—')+'</div></div><div class="detail-row"><div class="detail-label">Start Date</div><div class="detail-val">'+(m.startDate||'—')+'</div></div><div class="detail-row"><div class="detail-label">End Date</div><div class="detail-val">'+(m.endDate||'—')+'</div></div><div class="detail-row"><div class="detail-label">Hijri</div><div class="detail-val">'+(m.hijri||'—')+'</div></div>';if(m.description)b+='<div class="detail-row"><div class="detail-label">Description</div><div class="detail-val">'+m.description+'</div></div>';if(m.detail)b+='<div class="detail-row"><div class="detail-label">Additional</div><div class="detail-val">'+m.detail+'</div></div>';if(m.speakerName)b+='<div class="detail-row"><div class="detail-label">Speaker</div><div class="detail-val">'+m.speakerName+'</div></div>';if(m.location)b+='<div class="detail-row"><div class="detail-label">Location</div><div class="detail-val">'+m.location+'</div></div>';b+='<div class="detail-row"><div class="detail-label">Status</div><div class="detail-val">'+(m.status||'—')+'</div></div>';if(m.posterUrl)b+='<div class="detail-row"><div class="detail-label">Poster</div><div class="detail-val"><img src="'+m.posterUrl+'" style="max-width:200px;border-radius:4px" onerror="this.style.display=\'none\'"></div></div>';if(m.bannerUrl)b+='<div class="detail-row"><div class="detail-label">Banner</div><div class="detail-val"><img src="'+m.bannerUrl+'" style="max-width:200px;border-radius:4px" onerror="this.style.display=\'none\'"></div></div>';if(m.youtubeUrl){b+='<div class="detail-row"><div class="detail-label">YouTube</div><div class="detail-val"><a href="'+m.youtubeUrl+'" target="_blank" style="color:#6a8ad4">'+m.youtubeUrl+'</a></div></div>';var ytId=extractYtId(m.youtubeUrl);if(ytId)b+='<div style="margin-top:10px;border-radius:8px;overflow:hidden"><iframe src="https://www.youtube.com/embed/'+ytId+'" style="width:100%;aspect-ratio:16/9;border:none" allowfullscreen loading="lazy"></iframe></div>'}document.getElementById('dMdlBody').innerHTML=b;document.getElementById('dMdlYoutube').innerHTML='';document.getElementById('dMdl').classList.add('on')}
+    function saveM(){var im=document.getElementById('fMImam').value,ti=document.getElementById('fMTitle').value.trim(),sd=document.getElementById('fMStartDate').value.trim(),ed=document.getElementById('fMEndDate').value.trim(),hj=document.getElementById('fMHijri').value.trim(),ds=document.getElementById('fMDesc').value.trim(),dt=document.getElementById('fMDetail').value.trim(),po=document.getElementById('fMPoster').value.trim(),bn=document.getElementById('fMBanner').value.trim(),yt=document.getElementById('fMYt').value.trim(),sp=document.getElementById('fMSpeaker').value.trim(),lo=document.getElementById('fMLocation').value.trim(),st=document.getElementById('fMStatus').value;if(!ti){toast('Title required',1);return}var b=document.getElementById('mSaveBtn');b.textContent='Saving...';b.disabled=true;var d={imamName:im,title:ti,startDate:sd,endDate:ed,hijri:hj,status:st};if(ds)d.description=ds;if(dt)d.detail=dt;if(po)d.posterUrl=po;if(bn)d.bannerUrl=bn;if(yt)d.youtubeUrl=yt;if(sp)d.speakerName=sp;if(lo)d.location=lo;
+      if(editM!==null&&editM.indexOf('seed_')!==0){
+        db.ref('majalis/'+editM).update(d).then(function(){toast('Updated!');closeMdl('mMdl');loadM();b.textContent='Save';b.disabled=false}).catch(function(e){toast(e.message,1);b.textContent='Save';b.disabled=false});
+      }else{
+        db.ref('majalis').push(d).then(function(){toast(editM&&editM.indexOf('seed_')===0?'Local item synced & saved!':'Added!');closeMdl('mMdl');loadM();b.textContent='Save';b.disabled=false}).catch(function(e){toast(e.message,1);b.textContent='Save';b.disabled=false});
+      }}
+    function delM(k){if(!confirm('Delete this majlis?'))return;if(k.indexOf('seed_')===0){mData=mData.filter(function(m){return m._key!==k});renderM();toast('Removed from local data');return}db.ref('majalis/'+k).remove().then(function(){toast('Deleted');loadM()}).catch(function(e){toast(e.message,1)})}
+    window.editM=editMa;window.viewM=viewM;window.delM=delM;window.openAddM=openAddM;window.saveM=saveM;window.syncMajalis=syncMajalis;
+
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeMdl('hMdl');closeMdl('mMdl');closeMdl('dMdl')}});
+    ['hMdl','mMdl','dMdl'].forEach(function(id){document.getElementById(id).addEventListener('click',function(e){if(e.target===this)closeMdl(id)})});
+  </script>
+</body>
+</html>
