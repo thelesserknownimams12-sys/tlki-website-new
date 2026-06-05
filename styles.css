@@ -70,6 +70,7 @@ img { max-width: 100%; display: block; }
 /* ===== MOBILE MENU ===== */
 .mobile-menu { display: none; flex-direction: column; background: var(--bg-dark); border-bottom: 1px solid var(--border); padding: 16px 28px; position: fixed; top: var(--nav-h); left: 0; right: 0; z-index: 99; transform: translateY(-110%); opacity: 0; transition: transform 0.25s ease, opacity 0.25s ease; }
 .mobile-menu.open { transform: translateY(0); opacity: 1; }
+@media (max-width: 768px) { .mobile-menu { display: flex; } }
 .mobile-menu-link { font-size: 15px; color: var(--text); padding: 14px 0; border-bottom: 1px solid var(--border-subtle); transition: color var(--transition); }
 .mobile-menu-link:last-of-type { border-bottom: none; }
 .mobile-menu-link:hover { color: var(--gold); }
