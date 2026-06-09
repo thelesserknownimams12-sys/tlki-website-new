@@ -69,7 +69,10 @@
     <div class="contact-inner">
     <h2 class="sec-title">Contact Us</h2>
     <p class="contact-intro">We would love to hear from you. Whether you have a question, suggestion, or would like to collaborate, feel free to reach out.</p>
-    <form class="contact-form" id="contactForm" action="https://formspree.io/f/xwpkqdlq" method="POST" novalidate>
+    <form class="contact-form" id="contactForm" novalidate>
+      <input type="hidden" name="_subject" value="New TLKI Contact Message">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
       <div class="form-group">
         <label for="name">Name</label>
         <input type="text" id="name" name="name" required>
@@ -152,7 +155,11 @@
         submitBtn.textContent = 'Sending...';
 
         var data = new FormData(form);
-        fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } })
+        fetch('https://formsubmit.co/ajax/thelesserknownimams12@gmail.com', {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        })
           .then(function(res) {
             submitBtn.disabled = false;
             submitBtn.textContent = 'Submit';
