@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Upcoming Majalis — The Lesser Known Imams (as)">
+  <title>Majalis — The Lesser Known Imams (as)</title>
+  <link rel="icon" type="image/jpeg" href="assets/tlki-logo.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/tlki-logo.jpeg" alt="TLKI" class="nav-logo-img">
+      <span class="nav-logo-text">THE LESSER KNOWN IMAMS (as)</span>
+      <span class="nav-logo-text-short">TLKI (as)</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="imams.html" class="nav-link">Imams</a>
+      <a href="hadiths.html" class="nav-link">Hadiths</a>
+      <a href="support.html" class="nav-link">Support</a>
+      <a href="majalis.html" class="nav-link active">Majalis</a>
+      <a href="contribute.html" class="nav-link">Contribute</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </div>
+    <a href="https://chat.whatsapp.com/GLehgiD3m7d7w3pOgBCcWZ" target="_blank" rel="noopener" class="nav-cta">Join Community ↗</a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" class="mobile-menu-link">Home</a>
+    <a href="about.html" class="mobile-menu-link">About</a>
+    <a href="imams.html" class="mobile-menu-link">Imams</a>
+    <a href="hadiths.html" class="mobile-menu-link">Hadiths</a>
+    <a href="support.html" class="mobile-menu-link">Support</a>
+    <a href="majalis.html" class="mobile-menu-link">Majalis</a>
+    <a href="contribute.html" class="mobile-menu-link">Contribute</a>
+    <a href="contact.html" class="mobile-menu-link">Contact</a>
+    <a href="https://chat.whatsapp.com/GLehgiD3m7d7w3pOgBCcWZ" target="_blank" rel="noopener" class="mobile-menu-cta">Join Community ↗</a>
+  </div>
+
+  <section class="events" id="majalis">
+    <div class="container">
+      <h2 class="sec-title">Upcoming Majalis</h2>
+      <div class="sec-divider"></div>
+      <div class="majalis-grid" id="majalisGrid"></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-arabic">السلام عليكم يا أهل بيت النبوة</div>
+        <div class="footer-links">
+          <a href="index.html" class="footer-link">Home</a>
+          <a href="about.html" class="footer-link">About</a>
+          <a href="hadiths.html" class="footer-link">Hadiths</a>
+          <a href="majalis.html" class="footer-link">Majalis</a>
+          <a href="contribute.html" class="footer-link">Contribute</a>
+          <a href="contact.html" class="footer-link">Contact</a>
+        </div>
+        <div class="footer-social">
+          <a href="https://chat.whatsapp.com/GLehgiD3m7d7w3pOgBCcWZ" target="_blank" rel="noopener" class="social-btn" aria-label="WhatsApp">W</a>
+          <a href="https://www.youtube.com/watch?v=8UymIdHg3fc" target="_blank" rel="noopener" class="social-btn" aria-label="YouTube">YT</a>
+        </div>
+      </div>
+      <div class="footer-copy">© 2025 The Lesser Known Imams (as) · Made with love for the Ahlul Bayt (as)</div>
+    </div>
+  </footer>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+  <script src="script.js"></script>
+  <script>
+    (function() {
+      var firebaseConfig = {
+        apiKey: "AIzaSyBCZskOsHR9ij30pNrmzuxbs4P6cQMl5dg",
+        authDomain: "tlki-hadiths.firebaseapp.com",
+        databaseURL: "https://tlki-hadiths-default-rtdb.firebaseio.com",
+        projectId: "tlki-hadiths",
+        storageBucket: "tlki-hadiths.firebasestorage.app",
+        messagingSenderId: "792477774090",
+        appId: "1:792477774090:web:7cc8718e5ae8f060d70af3"
+      };
+      firebase.initializeApp(firebaseConfig);
+      var db = firebase.database();
+
+      function slugify(text) {
+        return (text||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+      }
+
+      var SEED_MAJALIS = [
+        {imam:'Imam Hadi (as)',title:'Shahadat of Imam Ali al-Naqi (as)',detail:'Also: Wiladat of Imam Mohammad al-Baqir (as)',startDate:'22 Dec 2025',endDate:'26 Dec 2025',hijri:'1st–5th Rajab',status:'upcoming',description:'Majalis gatherings commemorating the Shahadat of Imam Ali al-Naqi (as) and celebrating the Wiladat of Imam Mohammad al-Baqir (as).',youtubeUrl:'https://www.youtube.com/watch?v=8UymIdHg3fc',posterUrl:'',speaker:'',location:''},
+        {imam:'Imam Kazim (as)',title:'Shahadat of Imam Al Kazim (as)',detail:'Also: Wiladat of Janabe Ali Asgar, Wafat of Abu Talib, Be\'sat',startDate:'12 Jan 2026',endDate:'16 Jan 2026',hijri:'22nd–25th Rajab',status:'upcoming',description:'Commemorating the Shahadat of Imam Musa al-Kazim (as) along with the Wiladat of Janabe Ali Asgar and Wafat of Abu Talib.',youtubeUrl:'',posterUrl:'',speaker:'',location:''},
+        {imam:'Imam Sadiq (as)',title:'Shahadat of Imam Jafar al-Sadiq (as)',detail:'',startDate:'9 Apr 2026',endDate:'13 Apr 2026',hijri:'21st–25th Shawwal',status:'upcoming',description:'Majalis commemorating the Shahadat of Imam Jafar al-Sadiq (as), the 6th Imam of the Ahlul Bayt.',youtubeUrl:'',posterUrl:'',speaker:'',location:''},
+        {imam:'Imam Jawad (as)',title:'Shahadat of Imam Mohammad al-Taqi (as)',detail:'',startDate:'14 May 2026',endDate:'16 May 2026',hijri:'27th–29th Zilqaad',status:'upcoming',description:'Commemorating the Shahadat of Imam Mohammad al-Jawad (as), the 9th Imam.',youtubeUrl:'',posterUrl:'',speaker:'',location:''},
+        {imam:'Imam Baqir (as)',title:'Shahadat of Imam Mohammad al-Baqir (as)',detail:'Also: Shab-e-Arafat & Shahadat Janabe Muslim',startDate:'23 May 2026',endDate:'27 May 2026',hijri:'5th–9th Zilhajj',status:'upcoming',description:'Majalis gatherings for the Shahadat of Imam Mohammad al-Baqir (as) and commemorating Shab-e-Arafat.',youtubeUrl:'',posterUrl:'',speaker:'',location:''},
+        {imam:'Imam Hasan (as)',title:'Shahadat of Imam Hasan al-Mujtaba (as)',detail:'',startDate:'20 Jul 2026',endDate:'25 Jul 2026',hijri:'5th–10th Safar',status:'upcoming',description:'Commemorating the Shahadat of Imam Hasan al-Mujtaba (as), the 2nd Imam and Master of the Youth of Paradise.',youtubeUrl:'',posterUrl:'',speaker:'',location:''},
+        {imam:'Rasool-e-Khuda (s.a.w.a)',title:'Shahadat of Rasool-e-Khuda (s.a.w.a)',detail:'',startDate:'7 Aug 2026',endDate:'12 Aug 2026',hijri:'23rd–28th Safar',status:'upcoming',description:'Commemorating the Shahadat of Rasool-e-Khuda (s.a.w.a), the Holy Prophet of Islam.',youtubeUrl:'',posterUrl:'',speaker:'',location:''},
+        {imam:'Imam Askari (as)',title:'Shahadat of Imam Hasan Askari (as)',detail:'Also: Wafat of Janabe Masooma-e-Qum (s.a.)',startDate:'17 Aug 2026',endDate:'21 Aug 2026',hijri:'4th–8th Rabbi al Awwal',status:'upcoming',description:'Majalis commemorating the Shahadat of Imam Hasan al-Askari (as) and Wafat of Janabe Masooma-e-Qum (s.a.).',youtubeUrl:'',posterUrl:'',speaker:'',location:''}
+      ];
+
+      var majalisData = SEED_MAJALIS;
+
+      function renderMajalis(data) {
+        var grid = document.getElementById('majalisGrid');
+        if (!grid) return;
+        var html = '';
+        data.forEach(function(m, i) {
+          var statusClass = (m.status || 'upcoming');
+          var posterHtml = m.posterUrl
+            ? '<img src="' + m.posterUrl + '" alt="' + (m.title||'') + '" class="majalis-card-poster" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'"><div class="majalis-card-poster-placeholder" style="display:none"><div class="majalis-card-poster-icon">' + (m.imam||'').substring(0,3) + '</div><div class="majalis-card-poster-label">TLKI</div></div>'
+            : '<div class="majalis-card-poster-placeholder"><div class="majalis-card-poster-icon">' + (m.imam||'').substring(0,3) + '</div><div class="majalis-card-poster-label">TLKI</div></div>';
+          html += '<a href="majlis.html?id=' + (m._key || 'seed_'+i) + '" class="majalis-card fade-in">'
+            + posterHtml
+            + '<div class="majalis-card-body">'
+            + '<div class="majalis-card-imam">' + (m.imam||'') + '</div>'
+            + '<div class="majalis-card-title">' + (m.title||'') + '</div>'
+            + '<div class="majalis-card-meta">' + (m.startDate||'') + (m.endDate && m.endDate !== m.startDate ? ' → ' + m.endDate : '') + (m.hijri ? ' · ' + m.hijri : '') + '</div>'
+            + '<span class="majalis-card-status ' + statusClass + '">' + (m.status || 'Upcoming') + '</span>'
+            + '</div></a>';
+        });
+        grid.innerHTML = html;
+        grid.querySelectorAll('.fade-in').forEach(function(el) { el.classList.add('visible'); });
+      }
+
+      renderMajalis(majalisData);
+
+      db.ref('majalis').once('value').then(function(snap) {
+        var data = snap.val();
+        if (data && typeof data === 'object') {
+          var items = Object.keys(data).map(function(k) { var m = data[k]; m._key = k; return m; });
+          if (items.length > 0) {
+            majalisData = items;
+            renderMajalis(majalisData);
+          }
+        }
+      }).catch(function() {});
+    })();
+  </script>
+</body>
+</html>

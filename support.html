@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Support Our Mission — The Lesser Known Imams (as)">
+  <title>Support Our Mission — The Lesser Known Imams (as)</title>
+  <link rel="icon" type="image/jpeg" href="assets/tlki-logo.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <nav class="nav" id="mainNav">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/tlki-logo.jpeg" alt="TLKI" class="nav-logo-img">
+      <span class="nav-logo-text">THE LESSER KNOWN IMAMS (as)</span>
+      <span class="nav-logo-text-short">TLKI (as)</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="imams.html" class="nav-link">Imams</a>
+      <a href="hadiths.html" class="nav-link">Hadiths</a>
+      <a href="support.html" class="nav-link active">Support</a>
+      <a href="majalis.html" class="nav-link">Majalis</a>
+      <a href="contribute.html" class="nav-link">Contribute</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </div>
+    <a href="https://chat.whatsapp.com/GLehgiD3m7d7w3pOgBCcWZ" target="_blank" rel="noopener" class="nav-cta">Join Community ↗</a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" class="mobile-menu-link">Home</a>
+    <a href="about.html" class="mobile-menu-link">About</a>
+    <a href="imams.html" class="mobile-menu-link">Imams</a>
+    <a href="hadiths.html" class="mobile-menu-link">Hadiths</a>
+    <a href="support.html" class="mobile-menu-link">Support</a>
+    <a href="majalis.html" class="mobile-menu-link">Majalis</a>
+    <a href="contribute.html" class="mobile-menu-link">Contribute</a>
+    <a href="contact.html" class="mobile-menu-link">Contact</a>
+    <a href="https://chat.whatsapp.com/GLehgiD3m7d7w3pOgBCcWZ" target="_blank" rel="noopener" class="mobile-menu-cta">Join Community ↗</a>
+  </div>
+
+  <section class="campaigns" id="campaigns">
+    <div class="container">
+      <h2 class="sec-title">Support Our Mission</h2>
+      <p class="campaigns-sub">Your contributions fund majalis, hadith translation, and community outreach — keeping the legacies of the Ahlul Bayt (as) alive.</p>
+      <div class="campaign-content" id="campaignContent">
+        <div class="campaigns-list" id="campaignsList"></div>
+        <div class="support-right">
+          <div class="qr-section">
+            <p class="qr-label">Scan to contribute:</p>
+            <div class="qr-placeholder">
+              <img src="assets/barcode.png" alt="Scan to Contribute" class="qr-img">
+            </div>
+            <p class="qr-bank-name">RISE TOGETHER WELFARE TRUST</p>
+            <div class="qr-payment-methods">
+              <span class="qr-method-label">Or pay via:</span>
+              <div class="qr-method-icons">
+                <a href="tez://upi/pay?pa=rise3493@idfcbank&pn=RISE%20TOGETHER%20WELFARE%20TRUST" class="payment-icon" title="Google Pay">GPay</a>
+                <a href="paytmmp://pay?pa=rise3493@idfcbank&pn=RISE%20TOGETHER%20WELFARE%20TRUST" class="payment-icon" title="Paytm">Paytm</a>
+                <a href="upi://pay?pa=rise3493@idfcbank&pn=RISE%20TOGETHER%20WELFARE%20TRUST" class="payment-icon" title="UPI">UPI</a>
+              </div>
+            </div>
+            <a href="contribute.html" class="qr-view-details">View full bank details →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-arabic">السلام عليكم يا أهل بيت النبوة</div>
+        <div class="footer-links">
+          <a href="index.html" class="footer-link">Home</a>
+          <a href="about.html" class="footer-link">About</a>
+          <a href="hadiths.html" class="footer-link">Hadiths</a>
+          <a href="majalis.html" class="footer-link">Majalis</a>
+          <a href="contribute.html" class="footer-link">Contribute</a>
+          <a href="contact.html" class="footer-link">Contact</a>
+        </div>
+        <div class="footer-social">
+          <a href="https://chat.whatsapp.com/GLehgiD3m7d7w3pOgBCcWZ" target="_blank" rel="noopener" class="social-btn" aria-label="WhatsApp">W</a>
+          <a href="https://www.youtube.com/watch?v=8UymIdHg3fc" target="_blank" rel="noopener" class="social-btn" aria-label="YouTube">YT</a>
+        </div>
+      </div>
+      <div class="footer-copy">© 2025 The Lesser Known Imams (as) · Made with love for the Ahlul Bayt (as)</div>
+    </div>
+  </footer>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+  <script src="script.js"></script>
+  <script>
+    (function() {
+      var firebaseConfig = {
+        apiKey: "AIzaSyBCZskOsHR9ij30pNrmzuxbs4P6cQMl5dg",
+        authDomain: "tlki-hadiths.firebaseapp.com",
+        databaseURL: "https://tlki-hadiths-default-rtdb.firebaseio.com",
+        projectId: "tlki-hadiths",
+        storageBucket: "tlki-hadiths.firebasestorage.app",
+        messagingSenderId: "792477774090",
+        appId: "1:792477774090:web:7cc8718e5ae8f060d70af3"
+      };
+      firebase.initializeApp(firebaseConfig);
+      var db = firebase.database();
+
+      function extractYouTubeId(url) {
+        if (!url) return null;
+        var m = url.match(/(?:youtube\.com\/(?:watch\?v=|live\/|embed\/)|youtu\.be\/)([\w-]{11})/);
+        return m ? m[1] : null;
+      }
+
+      var SEED_CAMPAIGNS = [
+        {title:'Khamsa — Support Our Mission', description:'Your contributions fund majalis, hadith translation, and community outreach — keeping the legacies of the Ahlul Bayt (as) alive.', funded:0, goal:62000, status:'upcoming'}
+      ];
+
+      function renderCampaigns(cList) {
+        var listEl = document.getElementById('campaignsList');
+        if (!listEl) return;
+        var html = '';
+        cList.forEach(function(c) {
+          var pct = c.goal ? Math.round((c.funded || 0) / c.goal * 100) : 0;
+          var badgeClass = c.status === 'completed' ? ' done' : '';
+          var badgeText = c.status === 'completed' ? 'Completed' : c.status === 'upcoming' ? 'Upcoming' : 'Active';
+          html += '<div class="campaign-card fade-in">'
+            + '<div class="campaign-top">'
+            + '<div class="campaign-name">' + (c.title || 'Campaign') + '</div>'
+            + '<span class="campaign-badge' + badgeClass + '">' + badgeText + '</span>'
+            + '</div>';
+          if (c.description) html += '<p class="campaign-desc">' + c.description + '</p>';
+          html += '<div class="progress-track"><div class="progress-fill" style="width:' + pct + '%"></div></div>'
+            + '<div class="progress-meta"><span>' + pct + '% funded</span><span>₹' + (c.funded || 0).toLocaleString() + ' / ₹' + (c.goal || 0).toLocaleString() + '</span></div>';
+          if (c.status !== 'completed') {
+            html += '<div class="campaign-donate"><a href="contribute.html" class="btn-crimson">Contribute</a></div>';
+          } else {
+            html += '<div class="campaign-donate"><a href="contribute.html" class="btn-outline" style="font-size:14px">Contribute More</a></div>';
+          }
+          if (c.youtubeUrl) {
+            var ytId = extractYouTubeId(c.youtubeUrl);
+            if (ytId) html += '<div class="campaign-video"><iframe src="https://www.youtube.com/embed/' + ytId + '" allowfullscreen loading="lazy"></iframe></div>';
+          }
+          html += '</div>';
+        });
+        listEl.innerHTML = html;
+        listEl.querySelectorAll('.fade-in').forEach(function(el) { el.classList.add('visible'); });
+      }
+
+      renderCampaigns(SEED_CAMPAIGNS);
+
+      db.ref('campaigns').once('value').then(function(snap) {
+        var data = snap.val();
+        if (data && typeof data === 'object') {
+          var cList = Object.keys(data).map(function(k) { var c = data[k]; c._key = k; return c; });
+          if (cList.length > 0) {
+            renderCampaigns(cList);
+          }
+        }
+      }).catch(function() {});
+    })();
+  </script>
+</body>
+</html>

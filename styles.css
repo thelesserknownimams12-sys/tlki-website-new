@@ -445,39 +445,3 @@ section { position: relative; }
   .majalis-detail-title { font-size: 26px; }
   .majalis-detail-meta { gap: 14px; }
 }
-
-/* ===== ZIYARAT-E-GHADEER ===== */
-.ziyarat-trigger { position: fixed; bottom: 24px; right: 24px; z-index: 500; display: flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #C8A96A, #8B1A1A); color: #fff; font-family: var(--font-sans); font-size: 14px; font-weight: 600; padding: 12px 20px; border-radius: 30px; border: none; cursor: pointer; box-shadow: 0 4px 24px rgba(200,169,106,0.3); transition: transform 0.2s, box-shadow 0.2s; letter-spacing: 0.02em; white-space: nowrap; }
-.ziyarat-trigger:hover { transform: translateY(-2px); box-shadow: 0 6px 32px rgba(200,169,106,0.4); }
-.ziyarat-trigger-icon { font-size: 18px; line-height: 1; }
-.ziyarat-overlay { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s; }
-.ziyarat-overlay.ziyarat-open { opacity: 1; visibility: visible; }
-.ziyarat-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.88); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
-.ziyarat-panel { position: relative; background: #0e0e0e; border: 1px solid var(--border-mid); border-radius: var(--radius-lg); max-width: 700px; width: 92%; max-height: 80vh; overflow-y: auto; z-index: 1001; color: var(--text); }
-.ziyarat-panel::-webkit-scrollbar { width: 6px; }
-.ziyarat-panel::-webkit-scrollbar-track { background: #0a0a0a; }
-.ziyarat-panel::-webkit-scrollbar-thumb { background: var(--border-mid); border-radius: 3px; }
-.ziyarat-header { position: sticky; top: 0; background: linear-gradient(180deg, #0e0e0e 80%, transparent); padding: 28px 32px 20px; z-index: 2; text-align: center; border-bottom: 1px solid var(--border); }
-.ziyarat-header-arabic { font-family: var(--font-arabic); font-size: 28px; color: var(--gold); direction: rtl; margin-bottom: 6px; line-height: 1.6; }
-.ziyarat-header-title { font-family: var(--font-serif); font-size: 22px; color: var(--gold); margin-bottom: 6px; }
-.ziyarat-header-date { font-size: 13px; color: var(--green); background: var(--green-bg); border: 1px solid var(--green-border); display: inline-block; padding: 4px 14px; border-radius: 12px; font-weight: 500; }
-.ziyarat-close { position: absolute; top: 14px; right: 18px; font-size: 24px; color: var(--text-dim); cursor: pointer; transition: color 0.2s; background: none; border: none; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
-.ziyarat-close:hover { color: var(--gold); background: var(--gold-lighter); }
-.ziyarat-intro { font-size: 14px; color: var(--text-dim); line-height: 1.7; padding: 20px 32px 0; font-style: italic; }
-.ziyarat-body { padding: 20px 32px 32px; }
-.ziyarat-verse { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--border-subtle); }
-.ziyarat-verse:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-.ziyarat-arabic { font-family: var(--font-arabic); font-size: 22px; color: var(--gold); direction: rtl; text-align: right; line-height: 2; margin-bottom: 8px; overflow-wrap: break-word; word-break: break-word; }
-.ziyarat-translit { font-size: 13px; color: var(--text-dim); font-style: italic; line-height: 1.7; margin-bottom: 6px; overflow-wrap: break-word; word-break: break-word; }
-.ziyarat-translation { font-size: 15px; color: var(--text); line-height: 1.75; overflow-wrap: break-word; word-break: break-word; }
-@media (max-width: 768px) {
-  .ziyarat-trigger { bottom: 16px; right: 16px; padding: 10px 16px; font-size: 13px; }
-  .ziyarat-panel { width: 96%; max-height: 85vh; border-radius: var(--radius-md); }
-  .ziyarat-header { padding: 22px 20px 16px; }
-  .ziyarat-header-arabic { font-size: 22px; }
-  .ziyarat-header-title { font-size: 18px; }
-  .ziyarat-body { padding: 16px 20px 24px; }
-  .ziyarat-intro { padding: 16px 20px 0; }
-  .ziyarat-arabic { font-size: 19px; }
-  .ziyarat-translation { font-size: 14px; }
-}

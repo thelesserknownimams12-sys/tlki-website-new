@@ -38,11 +38,11 @@
     </a>
     <div class="nav-links">
       <a href="index.html" class="nav-link">Home</a>
-      <a href="index.html#about" class="nav-link">About</a>
-      <a href="index.html#imams" class="nav-link">Imams</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="imams.html" class="nav-link">Imams</a>
       <a href="hadiths.html" class="nav-link">Hadiths</a>
-      <a href="index.html#campaigns" class="nav-link">Support</a>
-      <a href="index.html#majalis" class="nav-link">Majalis</a>
+      <a href="support.html" class="nav-link">Support</a>
+      <a href="majalis.html" class="nav-link">Majalis</a>
       <a href="contribute.html" class="nav-link">Contribute</a>
       <a href="contact.html" class="nav-link active">Contact</a>
     </div>
@@ -54,11 +54,11 @@
 
   <div class="mobile-menu" id="mobileMenu">
     <a href="index.html" class="mobile-menu-link">Home</a>
-    <a href="index.html#about" class="mobile-menu-link">About</a>
-    <a href="index.html#imams" class="mobile-menu-link">Imams</a>
+    <a href="about.html" class="mobile-menu-link">About</a>
+    <a href="imams.html" class="mobile-menu-link">Imams</a>
     <a href="hadiths.html" class="mobile-menu-link">Hadiths</a>
-    <a href="index.html#campaigns" class="mobile-menu-link">Support</a>
-    <a href="index.html#majalis" class="mobile-menu-link">Majalis</a>
+    <a href="support.html" class="mobile-menu-link">Support</a>
+    <a href="majalis.html" class="mobile-menu-link">Majalis</a>
     <a href="contribute.html" class="mobile-menu-link">Contribute</a>
     <a href="contact.html" class="mobile-menu-link">Contact</a>
     <a href="https://chat.whatsapp.com/GLehgiD3m7d7w3pOgBCcWZ" target="_blank" rel="noopener" class="mobile-menu-cta">Join Community ↗</a>
@@ -85,9 +85,10 @@
         <textarea id="message" name="message" required></textarea>
         <div class="form-error" id="messageError"></div>
       </div>
-      <button type="submit" class="btn-gold">Submit</button>
+      <button type="submit" class="btn-gold" id="submitBtn">Submit</button>
     </form>
     <div class="form-success" id="formSuccess">Thank you for your message. We will get back to you soon.</div>
+    <div class="form-error" id="formError" style="display:none;text-align:center;color:var(--red-soft);margin-top:10px;font-size:14px;"></div>
     </div>
     </div>
    </section>
@@ -98,15 +99,14 @@
         <div class="footer-arabic">السلام عليكم يا أهل بيت النبوة</div>
         <div class="footer-links">
           <a href="index.html" class="footer-link">Home</a>
-          <a href="index.html#about" class="footer-link">About</a>
+          <a href="about.html" class="footer-link">About</a>
           <a href="hadiths.html" class="footer-link">Hadiths</a>
-          <a href="index.html#majalis" class="footer-link">Majalis</a>
+          <a href="majalis.html" class="footer-link">Majalis</a>
           <a href="contribute.html" class="footer-link">Contribute</a>
           <a href="contact.html" class="footer-link">Contact</a>
         </div>
         <div class="footer-social">
           <a href="https://chat.whatsapp.com/GLehgiD3m7d7w3pOgBCcWZ" target="_blank" rel="noopener" class="social-btn" aria-label="WhatsApp">W</a>
-          <a href="#" class="social-btn" aria-label="Instagram">IG</a>
           <a href="https://www.youtube.com/watch?v=8UymIdHg3fc" target="_blank" rel="noopener" class="social-btn" aria-label="YouTube">YT</a>
         </div>
       </div>
@@ -115,15 +115,15 @@
   </footer>
 
   <script src="script.js"></script>
-  <script src="ziyarat.js"></script>
   <script>
     (function() {
       var form = document.getElementById('contactForm');
       var success = document.getElementById('formSuccess');
+      var formError = document.getElementById('formError');
+      var submitBtn = document.getElementById('submitBtn');
 
       function setError(id, msg) {
-        var el = document.getElementById(id);
-        el.textContent = msg;
+        document.getElementById(id).textContent = msg;
       }
 
       function clearErrors() {
@@ -133,7 +133,9 @@
       }
 
       form.addEventListener('submit', function(e) {
+        e.preventDefault();
         clearErrors();
+        formError.style.display = 'none';
         var valid = true;
         var name = document.getElementById('name').value.trim();
         var email = document.getElementById('email').value.trim();
@@ -144,16 +146,34 @@
         else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setError('emailError', 'Please enter a valid email.'); valid = false; }
         if (!message) { setError('messageError', 'Message is required.'); valid = false; }
 
-        if (!valid) { e.preventDefault(); return; }
+        if (!valid) return;
 
-        e.preventDefault();
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+
         var data = new FormData(form);
         fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } })
           .then(function(res) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Submit';
             if (res.ok) {
               form.style.display = 'none';
               success.classList.add('visible');
+            } else {
+              return res.json();
             }
+          })
+          .then(function(errData) {
+            if (errData && errData.errors) {
+              formError.textContent = errData.errors.map(function(e) { return e.message; }).join(', ');
+              formError.style.display = 'block';
+            }
+          })
+          .catch(function() {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Submit';
+            formError.textContent = 'Something went wrong. Please try again or contact us via WhatsApp.';
+            formError.style.display = 'block';
           });
       });
     })();
